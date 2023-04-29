@@ -57,7 +57,7 @@ require('inc/header.php');
                 <a href="https://accounts.google.com/v3/signin/identifier?dsh=S923217174%3A1682671027390158&authuser=0&continue=https%3A%2F%2Fmyaccount.google.com%2F%3Futm_source%3Daccount-marketing-page%26utm_medium%3Dgo-to-account-button%26pli%3D1&ec=GAlAwAE&hl=en&service=accountsettings&flowName=GlifWebSignIn&flowEntry=AddSession" class="google" target="_blank"><i class="fa fa-google"></i> Sign in With Google</a>
               </li>
               <li>
-                <a href="https://twitter.com/i/flow/login" class="twitter" target="_blank">
+                <a href="#" class="twitter"><i class="fa fa-twitter"></i> Sign in With Twitter</a>
               </li>
             </ul>
           </div>

@@ -23,6 +23,7 @@ require('inc/header.php');
                     <div class="col-lg-6">
                         <div class="hero__text">
                             <div class="label">Adventure</div>
+                            <div class="label">Adventure</div>
                             <h2>Fate / Stay Night: Unlimited Blade Works</h2>
                             <p>After 30 days of travel across the world...</p>
                             <a href="anime-details.php"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
@@ -61,7 +62,7 @@ require('inc/header.php');
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="btn__all">
-                                <a href="anime-details.php" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                <a href="categories.php" class="primary-btn">View All <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -173,7 +174,7 @@ require('inc/header.php');
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="btn__all">
-                                <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                <a href="categories.php" class="primary-btn">View All <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -285,7 +286,7 @@ require('inc/header.php');
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="btn__all">
-                                <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                <a href="categories.php" class="primary-btn">View All <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -397,7 +398,7 @@ require('inc/header.php');
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="btn__all">
-                                <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                <a href="categories.php" class="primary-btn">View All <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>

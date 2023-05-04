@@ -72,10 +72,35 @@ require('inc/header.php');
                         </div>
                         <div class="anime__details__btn">
                             <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-                            <a href="anime-watching.php" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
+
                 </div>
+                <div class="anime__details__episodes">
+                    <div class="section-title">
+                        <h5>List Name</h5>
+                    </div>
+                    <a href="anime-watching.php">Ep 01</a>
+                    <a href="anime-watching.php">Ep 02</a>
+                    <a href="anime-watching.php">Ep 03</a>
+                    <a href="anime-watching.php">Ep 04</a>
+                    <a href="anime-watching.php">Ep 05</a>
+                    <a href="anime-watching.php">Ep 06</a>
+                    <a href="anime-watching.php">Ep 07</a>
+                    <a href="anime-watching.php">Ep 08</a>
+                    <a href="anime-watching.php">Ep 09</a>
+                    <a href="anime-watching.php">Ep 10</a>
+                    <a href="anime-watching.php">Ep 11</a>
+                    <a href="anime-watching.php">Ep 12</a>
+                    <a href="anime-watching.php">Ep 13</a>
+                    <a href="anime-watching.php">Ep 14</a>
+                    <a href="anime-watching.php">Ep 15</a>
+                    <a href="anime-watching.php">Ep 16</a>
+                    <a href="anime-watching.php">Ep 17</a>
+                    <a href="anime-watching.php">Ep 18</a>
+                    <a href="anime-watching.php">Ep 19</a>
+                </div>
+
             </div>
         </div>
         <div class="row">

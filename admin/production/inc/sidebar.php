@@ -47,8 +47,9 @@
 
                                       </ul>
                                   </li>
+
                                   <li>
-                                      <a><i class="fa fa-folder-open-o"></i> Users
+                                      <a><i class="fa fa-user"></i> Users
                                           <span class="fa fa-chevron-down"></span></a>
                                       <ul class="nav child_menu">
                                           <li>

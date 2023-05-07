@@ -1,5 +1,6 @@
 <?php
 require('inc/header.php');
+require('connection/config.php');
 ?>
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">
@@ -72,10 +73,35 @@ require('inc/header.php');
                         </div>
                         <div class="anime__details__btn">
                             <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-                            <a href="anime-watching.php" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
+
                 </div>
+                <div class="anime__details__episodes">
+                    <div class="section-title">
+                        <h5>List Name</h5>
+                    </div>
+                    <a href="anime-watching.php">Ep 01</a>
+                    <a href="anime-watching.php">Ep 02</a>
+                    <a href="anime-watching.php">Ep 03</a>
+                    <a href="anime-watching.php">Ep 04</a>
+                    <a href="anime-watching.php">Ep 05</a>
+                    <a href="anime-watching.php">Ep 06</a>
+                    <a href="anime-watching.php">Ep 07</a>
+                    <a href="anime-watching.php">Ep 08</a>
+                    <a href="anime-watching.php">Ep 09</a>
+                    <a href="anime-watching.php">Ep 10</a>
+                    <a href="anime-watching.php">Ep 11</a>
+                    <a href="anime-watching.php">Ep 12</a>
+                    <a href="anime-watching.php">Ep 13</a>
+                    <a href="anime-watching.php">Ep 14</a>
+                    <a href="anime-watching.php">Ep 15</a>
+                    <a href="anime-watching.php">Ep 16</a>
+                    <a href="anime-watching.php">Ep 17</a>
+                    <a href="anime-watching.php">Ep 18</a>
+                    <a href="anime-watching.php">Ep 19</a>
+                </div>
+
             </div>
         </div>
         <div class="row">
@@ -156,26 +182,23 @@ require('inc/header.php');
                     <div class="section-title">
                         <h5>you might like...</h5>
                     </div>
-                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-1.jpg">
-                        <div class="ep">18 / ?</div>
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                        <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                    </div>
-                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-2.jpg">
-                        <div class="ep">18 / ?</div>
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                    </div>
-                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-3.jpg">
-                        <div class="ep">18 / ?</div>
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                        <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                    </div>
-                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-4.jpg">
-                        <div class="ep">18 / ?</div>
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                        <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
-                    </div>
+                    <?php
+                    $anime_query = "SELECT * FROM `anime_info`  ORDER BY `id` DESC";
+                    $anime_result = mysqli_query($conn, $anime_query);
+                    $count = 0;
+                    while ($count < 3) {
+                        $data = mysqli_fetch_array($anime_result);
+                        $count += 1;
+                    ?>
+                        <div class="product__sidebar__view__item set-bg" data-setbg="<?php echo $data["Anime_Img"] ?>">
+                            <div class="ep">18 / ?</div>
+                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                            <h5><a href="#"><?php echo $data['Anime_Name'] ?></a></h5>
+                        </div>
+                    <?php
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>

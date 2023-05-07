@@ -43,13 +43,13 @@ gulp.task('browser-sync', function() {
         server: {
             baseDir: './'
         },
-        startPath: './production/index.html'
+        startPath: './production/index.php'
     });
 });
 
 gulp.task('watch', function() {
   // Watch .html files
-  gulp.watch('production/*.html', browserSync.reload);
+  gulp.watch('production/*.php', browserSync.reload);
   // Watch .js files
   gulp.watch('src/js/*.js', ['scripts']);
   // Watch .scss files

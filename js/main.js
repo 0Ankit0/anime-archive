@@ -51,16 +51,16 @@
     });
 
     /*------------------
-		Navigation
-	--------------------*/
+        Navigation
+    --------------------*/
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
     });
 
     /*------------------
-		Hero Slider
-	--------------------*/
+        Hero Slider
+    --------------------*/
     var hero_s = $(".hero__slider");
     hero_s.owlCarousel({
         loop: true,
@@ -93,9 +93,24 @@
     /*------------------
         Scroll To Top
     --------------------*/
-    $("#scrollToTopButton").click(function() {
+    $("#scrollToTopButton").click(function () {
         $("html, body").animate({ scrollTop: 0 }, "slow");
         return false;
-     });
+    });
 
 })(jQuery);
+
+/*------------------
+        Add and Remove active class
+    --------------------*/
+const navItems = document.querySelectorAll('.header__menu li');
+
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        // Remove "active" class from all items
+        navItems.forEach(item => item.classList.remove('active'));
+
+        // Add "active" class to clicked item
+        item.classList.add('active');
+    });
+});

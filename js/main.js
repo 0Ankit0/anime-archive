@@ -11,10 +11,12 @@
 
 (function ($) {
 
+
     /*------------------
         Preloader
     --------------------*/
     $(window).on('load', function () {
+
         $(".loader").fadeOut();
         $("#preloder").delay(200).fadeOut("slow");
 
@@ -100,17 +102,3 @@
 
 })(jQuery);
 
-/*------------------
-        Add and Remove active class
-    --------------------*/
-const navItems = document.querySelectorAll('.header__menu li');
-
-navItems.forEach(item => {
-    item.addEventListener('click', () => {
-        // Remove "active" class from all items
-        navItems.forEach(item => item.classList.remove('active'));
-
-        // Add "active" class to clicked item
-        item.classList.add('active');
-    });
-});

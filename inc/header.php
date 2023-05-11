@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
 </head>
 
 <body>
@@ -45,7 +46,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="./index.php">Homepage</a></li>
+                                <li><a href="./index.php">Homepage</a></li>
                                 <li><a href="./categories.php">Categories</a></li>
                                 <li><a href="./blog.php">Our Blog</a></li>
                                 <li><a href="#">Contacts</a></li>

@@ -26,6 +26,10 @@
 </head>
 
 <body>
+    <?php
+    session_start();
+
+    ?>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -56,8 +60,28 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="header__right">
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                        <a href="./admin/production/index.php"><span class="icon_profile"></span></a>
+                        <p style="color:whitesmoke">
+                            <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                            <a href="
+                            <?php
+                            if (isset($_SESSION['username'])) {
+                                echo "admin/production/logout.php";
+                            } else {
+                                echo "./admin/production/index.php";
+                            }
+                            ?>
+                            ">
+                                <?php
+
+                                if (isset($_SESSION['username'])) {
+                                    echo $_SESSION['username'];
+                                }
+
+                                ?>
+                                <span class="icon_profile"></span>
+                            </a>
+                        </p>
+
                     </div>
                 </div>
             </div>

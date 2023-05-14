@@ -3,7 +3,7 @@ require('../../connection/config.php');
 
 if (isset($_POST['Login'])) {
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
 
     $sql = "SELECT * FROM  user WHERE `Email`='$email' && `Password`='$password'";
     $result = mysqli_query($conn, $sql);

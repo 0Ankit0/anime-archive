@@ -1,4 +1,6 @@
   <body class="nav-md footer_fixed">
+
+
       <!-- footer_fixed to make the footer fixed -->
       <div class="container body">
           <div class="main_container">
@@ -21,7 +23,6 @@
                               <span>Welcome,</span>
                               <h2>
                                   <?php
-                                    session_start();
                                     if (isset($_SESSION['username'])) {
                                         echo $_SESSION['username'];
                                     }

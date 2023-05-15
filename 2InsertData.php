@@ -20,6 +20,6 @@ VALUES ('$description', '$name', '$fileextension')");
 mysql_close($connection);
 
 ?>
-<p id="para6">Videos
+<p id="para6">Videos 
 
 

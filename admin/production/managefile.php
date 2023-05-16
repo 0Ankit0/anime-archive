@@ -56,55 +56,42 @@ if (!isset($_SESSION['username'])) {
                             <table class="table table-striped projects">
                                 <thead>
                                     <tr>
-                                        <th style="width: 1%">#</th>
-                                        <th>Project Name</th>
-                                        <th style="width: 20%">Edit</th>
+                                        <th style="width: 1%">I.D</th>
+                                        <th>Episode Name</th>
+                                        <th>Episode video</th>
+                                        <th>Anime Name</th>
+                                        <th style="width: 20%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>#</td>
-                                        <td>
-                                            <a>Pesamakini Backend UI</a>
-                                            <br />
-                                            <small>Created 01.01.2015</small>
-                                        </td>
+                                    <?php
+                                    $sql = "SELECT * FROM videos";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $row['id'] ?></td>
 
-                                        <td>
+                                            <td><?php echo $row['Episode_Name'] ?></td>
 
-                                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#</td>
-                                        <td>
-                                            <a>Pesamakini Backend UI</a>
-                                            <br />
-                                            <small>Created 01.01.2015</small>
-                                        </td>
 
-                                        <td>
+                                            <td>
+                                                <video width='120' height="60" controls>
+                                                    <source src='Uploads/videos/ep1.<?php echo $row['ext']
+                                                                                    ?>' type='video/mp4'>Your browser doesnot support the video tag.
+                                                </video>"
+                                            </td>
 
-                                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#</td>
-                                        <td>
-                                            <a>Pesamakini Backend UI</a>
-                                            <br />
-                                            <small>Created 01.01.2015</small>
-                                        </td>
+                                            <td><?php echo $row['A_Name'] ?></td>
 
-                                        <td>
+                                            <td>
 
-                                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                                        </td>
-                                    </tr>
-
+                                                <a href="deletefile.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                             <!-- end file list -->

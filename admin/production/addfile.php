@@ -42,7 +42,7 @@ if (!isset($_SESSION['username'])) {
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Registration Form <small>Click to validate</small></h2>
+                            <h2>Add Files <small>Click to validate</small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -61,52 +61,37 @@ if (!isset($_SESSION['username'])) {
                         <div class="x_content">
 
                             <!-- start form for validation -->
-                            <form id="demo-form" data-parsley-validate>
-                                <label for="fullname">Full Name * :</label>
-                                <input type="text" id="fullname" class="form-control" name="fullname" required />
+                            <form id="demo-form" data-parsley-validate enctype="multipart/form-data" action="Files.php" method="post">
+                                <label for="epname">Episode Name * :</label>
+                                <input type="text" class="form-control" name="epname" required />
 
-                                <label for="email">Email * :</label>
-                                <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                                <label for="file">Episode file * :</label>
+                                <input type="file" id="file" class="form-control" name="file" data-parsley-trigger="change" required />
 
-                                <label>Gender *:</label>
-                                <p>
-                                    M:
-                                    <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /> F:
-                                    <input type="radio" class="flat" name="gender" id="genderF" value="F" />
-                                </p>
 
-                                <label>Hobbies (2 minimum):</label>
-                                <p style="padding: 5px;">
-                                    <input type="checkbox" name="hobbies[]" id="hobby1" value="ski" data-parsley-mincheck="2" required class="flat" /> Skiing
-                                    <br />
+                                <label for="animeInfo">Anime Name*:</label>
+                                <select id="animeInfo" class="form-control" name="animeName" required>
+                                    <option value="">Choose..</option>
+                                    <?php
 
-                                    <input type="checkbox" name="hobbies[]" id="hobby2" value="run" class="flat" /> Running
-                                    <br />
+                                    $anime_query = "SELECT * FROM `anime_info`";
+                                    $anime_result = mysqli_query($conn, $anime_query);
+                                    while ($data = mysqli_fetch_array($anime_result)) {
 
-                                    <input type="checkbox" name="hobbies[]" id="hobby3" value="eat" class="flat" /> Eating
-                                    <br />
+                                    ?>
+                                        <option value="<?php echo $data['Anime_Name'] ?>"><?php echo $data['Anime_Name'] ?></option>
 
-                                    <input type="checkbox" name="hobbies[]" id="hobby4" value="sleep" class="flat" /> Sleeping
-                                    <br />
-                                <p>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
 
-                                    <label for="heard">Heard us by *:</label>
-                                    <select id="heard" class="form-control" required>
-                                        <option value="">Choose..</option>
-                                        <option value="press">Press</option>
-                                        <option value="net">Internet</option>
-                                        <option value="mouth">Word of mouth</option>
-                                    </select>
-
-                                    <label for="message">Message (20 chars min, 100 max) :</label>
-                                    <textarea id="message" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
-
-                                    <br />
+                                <br />
                                 <div class="form-group">
                                     <div class="col-md-9 col-sm-9  offset-md-3">
                                         <button type="cancel" class="btn btn-warning">Cancel</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-success" name="submit">Submit</button>
                                     </div>
                                 </div>
 

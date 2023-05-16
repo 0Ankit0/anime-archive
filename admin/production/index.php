@@ -1,5 +1,5 @@
 <?php
-require('inc/header.php')
+require('inc/header.php');
 ?>
 
 <body class="login">
@@ -10,21 +10,17 @@ require('inc/header.php')
     <div class="login_wrapper">
       <div class="animate form login_form">
         <section class="login_content">
-          <form>
-            <h1>Login Form</h1>
+
+          <form action="process-login-signup.php" method="POST">
+            <h1>Login form</h1>
+            <input type="email" class="form-control" id="floatingInput" placeholder="Email Address" name="email">
+
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+
             <div>
-              <input type="text" class="form-control" placeholder="Username" required="" />
-            </div>
-            <div>
-              <input type="password" class="form-control" placeholder="Password" required="" />
-            </div>
-            <div>
-              <a class="btn btn-default submit" href="dashboard.php">Log in</a>
+              <button type="submit" class="btn btn-primary" name="Login">Log in</button>
               <a class="reset_pass" href="#">Lost your password?</a>
             </div>
-
-            <div class="clearfix"></div>
-
             <div class="separator">
               <p class="change_link">New to site?
                 <a href="#signup" class="to_register"> Create Account </a>
@@ -33,10 +29,7 @@ require('inc/header.php')
               <div class="clearfix"></div>
               <br />
 
-              <div>
-                <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
-              </div>
+
             </div>
           </form>
         </section>
@@ -44,19 +37,24 @@ require('inc/header.php')
 
       <div id="register" class="animate form registration_form">
         <section class="login_content">
-          <form>
+          <form action="process-login-signup.php" method="post">
             <h1>Create Account</h1>
-            <div>
-              <input type="text" class="form-control" placeholder="Username" required="" />
+            <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+
+            <input type="email" class="form-control" id="floatingInput" placeholder="Email Address" name="email">
+
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+
+            <div class="input-group mb-3">
+              <label class="input-group-text" for="inputGroupSelect01">Role</label>
+              <select class="form-select" id="inputGroupSelect01" name="role">
+                <option value="user">user</option>
+                <option value="creator">creator</option>
+              </select>
             </div>
+
             <div>
-              <input type="email" class="form-control" placeholder="Email" required="" />
-            </div>
-            <div>
-              <input type="password" class="form-control" placeholder="Password" required="" />
-            </div>
-            <div>
-              <a class="btn btn-default submit" href="index.php">Submit</a>
+              <button type="submit" class="btn btn-primary" name="create">Create</button>
             </div>
 
             <div class="clearfix"></div>
@@ -69,10 +67,7 @@ require('inc/header.php')
               <div class="clearfix"></div>
               <br />
 
-              <div>
-                <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
-              </div>
+
             </div>
           </form>
         </section>

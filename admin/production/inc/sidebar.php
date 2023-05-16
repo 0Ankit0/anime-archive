@@ -1,4 +1,6 @@
   <body class="nav-md footer_fixed">
+
+
       <!-- footer_fixed to make the footer fixed -->
       <div class="container body">
           <div class="main_container">
@@ -19,7 +21,13 @@
                           </div>
                           <div class="profile_info">
                               <span>Welcome,</span>
-                              <h2>John Doe</h2>
+                              <h2>
+                                  <?php
+                                    if (isset($_SESSION['username'])) {
+                                        echo $_SESSION['username'];
+                                    }
+                                    ?>
+                              </h2>
                           </div>
                       </div>
                       <!-- /menu profile quick info -->
@@ -96,7 +104,13 @@
                           <ul class="navbar-right">
                               <li class="nav-item dropdown open" style="padding-left: 15px">
                                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                      <img src="images/img.jpg" alt="" />John Doe
+                                      <img src="images/img.jpg" alt="" />
+                                      <?php
+
+                                        if (isset($_SESSION['username'])) {
+                                            echo $_SESSION['username'];
+                                        }
+                                        ?>
                                   </a>
                                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                       <a class="dropdown-item" href="javascript:;"> Profile</a>
@@ -105,7 +119,7 @@
                                           <span>Settings</span>
                                       </a>
                                       <a class="dropdown-item" href="javascript:;">Help</a>
-                                      <a class="dropdown-item" href="index.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                      <a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                   </div>
                               </li>
 

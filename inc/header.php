@@ -22,9 +22,14 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
 </head>
 
 <body>
+    <?php
+    session_start();
+
+    ?>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -45,7 +50,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="./index.php">Homepage</a></li>
+                                <li><a href="./index.php">Homepage</a></li>
                                 <li><a href="./categories.php">Categories</a></li>
                                 <li><a href="./blog.php">Our Blog</a></li>
                                 <li><a href="#">Contacts</a></li>
@@ -55,8 +60,28 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="header__right">
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                        <a href="./admin/production/index.php"><span class="icon_profile"></span></a>
+                        <p style="color:whitesmoke">
+                            <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                            <a href="
+                            <?php
+                            if (isset($_SESSION['username'])) {
+                                echo "admin/production/logout.php";
+                            } else {
+                                echo "./admin/production/index.php";
+                            }
+                            ?>
+                            ">
+                                <?php
+
+                                if (isset($_SESSION['username'])) {
+                                    echo $_SESSION['username'];
+                                }
+
+                                ?>
+                                <span class="icon_profile"></span>
+                            </a>
+                        </p>
+
                     </div>
                 </div>
             </div>

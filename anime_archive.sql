@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 10:49 AM
+-- Generation Time: May 16, 2023 at 02:04 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -66,6 +66,31 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `User_Name` varchar(50) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Password` varchar(200) NOT NULL,
+  `Role` text NOT NULL DEFAULT 'User',
+  `Created_At` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Updated_At` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `User_Name`, `Email`, `Password`, `Role`, `Created_At`, `Updated_At`) VALUES
+(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', '2023-05-09 04:38:12', '2023-05-14 01:10:20'),
+(5, 'user', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', '2023-05-13 07:59:13', '2023-05-14 01:10:39'),
+(7, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'user', '2023-05-14 01:08:28', '2023-05-14 01:09:08');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `videos`
 --
 
@@ -73,7 +98,8 @@ CREATE TABLE `videos` (
   `id` int(11) NOT NULL,
   `Episode_Name` varchar(50) NOT NULL,
   `Ep_Video` varchar(255) NOT NULL,
-  `A_Id` int(11) NOT NULL,
+  `A_Name` varchar(200) NOT NULL,
+  `ext` varchar(50) NOT NULL,
   `Created_At` timestamp NOT NULL DEFAULT current_timestamp(),
   `Updated_At` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -96,11 +122,16 @@ ALTER TABLE `comments`
   ADD UNIQUE KEY `A_Id` (`A_Id`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `videos`
 --
 ALTER TABLE `videos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `A_Id` (`A_Id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -119,10 +150,16 @@ ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

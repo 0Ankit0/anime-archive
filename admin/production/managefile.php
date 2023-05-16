@@ -77,9 +77,9 @@ if (!isset($_SESSION['username'])) {
 
                                             <td>
                                                 <video width='120' height="60" controls>
-                                                    <source src='Uploads/videos/ep1.<?php echo $row['ext']
-                                                                                    ?>' type='video/mp4'>Your browser doesnot support the video tag.
-                                                </video>"
+                                                    <source src='../../Uploads/videos/<?php echo $row['Ep_Video']
+                                                                                        ?>' type='video/<?php echo $row['ext'] ?>'>Your browser doesnot support the video tag.
+                                                </video>
                                             </td>
 
                                             <td><?php echo $row['A_Name'] ?></td>

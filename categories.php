@@ -10,7 +10,7 @@ require('connection/config.php');
                 <div class="breadcrumb__links">
                     <a href="./index.html"><i class="fa fa-home"></i> Home</a>
                     <a href="./categories.html">Categories</a>
-                    <span>Romance</span>
+                    <span><?php echo $_GET['category'] ?></span>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@ require('connection/config.php');
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-6">
                                 <div class="section-title">
-                                    <h4>Romance</h4>
+                                    <h4><?php echo $_GET['category'] ?></h4>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
@@ -97,7 +97,7 @@ require('connection/config.php');
                         </ul> -->
                         <div class="filter__gallery">
                             <?php
-                            $anime_query = "SELECT * FROM `anime_info`  ORDER BY `id` DESC";
+                            $anime_query = "SELECT * FROM `anime_info`  ORDER BY `Views` DESC";
                             $anime_result = mysqli_query($conn, $anime_query);
                             $count = 0;
                             while ($count < 3) {
@@ -106,8 +106,9 @@ require('connection/config.php');
                             ?>
                                 <div class="product__sidebar__view__item set-bg mix day years" data-setbg="<?php echo $data["Anime_Img"] ?>">
                                     <div class="ep">18 / ?</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="anime-details.php"><?php echo $data['Anime_Name'] ?></a></h5>
+                                    <div class="view"><i class="fa fa-eye"></i><?php echo $data['Views'] ?> </div>
+                                    <h5><a href="anime-details.php?id=<?php echo $data['id']
+                                                                        ?>"><?php echo $data['Anime_Name'] ?></a></h5>
                                 </div>
                             <?php
                             }

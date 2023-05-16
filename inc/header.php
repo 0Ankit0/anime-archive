@@ -52,7 +52,6 @@
                             <ul>
                                 <li><a href="./index.php">Homepage</a></li>
                                 <li><a href="./categories.php">Categories</a></li>
-                                <li><a href="./blog.php">Our Blog</a></li>
                                 <li><a href="#">Contacts</a></li>
                             </ul>
                         </nav>

@@ -3,19 +3,7 @@ require('inc/header.php');
 require('connection/config.php');
 ?>
 <!-- Breadcrumb Begin -->
-<div class="breadcrumb-option">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="breadcrumb__links">
-                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                    <a href="./categories.html">Categories</a>
-                    <span><?php echo $_GET['category'] ?></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- Breadcrumb End -->
 
 <!-- Product Section Begin -->
@@ -28,29 +16,18 @@ require('connection/config.php');
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-6">
                                 <div class="section-title">
-                                    <h4><?php echo $_GET['category'] ?></h4>
+                                    <h4>Anime Lists</h4>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="product__page__filter">
-                                    <p>Order by:</p>
-                                    <select>
-                                        <option value="">A-Z</option>
-                                        <option value="">1-10</option>
-                                        <option value="">10-50</option>
-                                    </select>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="row">
                         <?php
                         $anime_query = "SELECT * FROM `anime_info`  ORDER BY `id` DESC";
                         $anime_result = mysqli_query($conn, $anime_query);
-                        $count = 0;
-                        while ($count < 3) {
-                            $data = mysqli_fetch_array($anime_result);
-                            $count += 1;
+                        while ($data = mysqli_fetch_array($anime_result)) {
+
                         ?>
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">

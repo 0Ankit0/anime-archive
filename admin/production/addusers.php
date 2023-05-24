@@ -67,7 +67,7 @@ if (!isset($_SESSION['username'])) {
                                 $result = mysqli_query($conn, $sql);
                                 $row = $result->fetch_assoc();
                             ?>
-                                <form id="demo-form" data-parsley-validate action="users.php" method="post">
+                                <form id="demo-form" data-parsley-validate action="users.php" method="post" enctype="multipart/form-data">
                                     <label for="fullname">User Name * :</label>
                                     <input type="text" id="fullname" class="form-control" name="fullname" value="<?php echo $row['User_Name'] ?>" />
 
@@ -105,9 +105,12 @@ if (!isset($_SESSION['username'])) {
                             <?php
                             } else {
                             ?>
-                                <form id="demo-form" data-parsley-validate action="users.php" method="post">
+                                <form id="demo-form" data-parsley-validate action="users.php" method="POST" enctype="multipart/form-data">
                                     <label for="fullname">User Name * :</label>
                                     <input type="text" id="fullname" class="form-control" name="fullname" required />
+
+                                    <label for="file">Episode file * :</label>
+                                    <input type="file" id="file" class="form-control" name="Picture" data-parsley-trigger="change" required />
 
                                     <label for="email">Email * :</label>
                                     <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />

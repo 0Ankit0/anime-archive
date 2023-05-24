@@ -58,6 +58,7 @@ if (!isset($_SESSION['username'])) {
                                     <tr>
                                         <th style="width: 1%">I.D</th>
                                         <th style="width: 20%">User Name</th>
+                                        <th>Picture</th>
                                         <th>Email</th>
                                         <th>Password</th>
                                         <th>Role</th>
@@ -75,6 +76,7 @@ if (!isset($_SESSION['username'])) {
 
                                             <td><?php echo $row['User_Name'] ?></td>
 
+                                            <td><a href="../../Uploads/Pictures/<?php echo $row['Pic']; ?>" target="_blank"><img src="../../Uploads/Pictures/<?php echo $row['Pic']; ?>" width="70" height="50"></td>
 
                                             <td><?php echo $row['Email'] ?></td>
 
@@ -84,7 +86,7 @@ if (!isset($_SESSION['username'])) {
                                             </td>
                                             <td>
 
-                                                <a href="addusers.php?id=<?php echo $row['id'] ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                                <!-- <a href="addusers.php?id=<?php echo $row['id'] ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a> -->
                                                 <a href="deleteuser.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                                             </td>
                                         </tr>

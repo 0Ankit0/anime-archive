@@ -11,12 +11,16 @@ if (isset($_POST['Login'])) {
     if ($result) {
         session_start();
         $_SESSION['username'] = $row['User_Name'];
+        $_SESSION['role'] = $row['Role'];
+        $_SESSION['role'] = $row['Role'];
+        $_SESSION['Pic'] = $row['Pic'];
+
         switch ($row['Role']) {
             case "user":
                 header("location:/anime-archive/");
                 break;
             case "creator":
-                echo "<h1>creator</h1>";
+                header("location:dashboard.php");
                 break;
             case "admin":
                 header("location:dashboard.php");

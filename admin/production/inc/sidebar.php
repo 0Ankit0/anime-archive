@@ -17,7 +17,7 @@
                       <!-- menu profile quick info -->
                       <div class="profile clearfix">
                           <div class="profile_pic">
-                              <img src="images/img.jpg" alt="..." class="img-circle profile_img" />
+                              <img src="../../Uploads/Pictures/<?php echo $_SESSION['Pic'] ?>" alt="..." class="img-circle profile_img" height="60" />
                           </div>
                           <div class="profile_info">
                               <span>Welcome,</span>
@@ -42,32 +42,48 @@
                                   <li>
                                       <a href="dashboard.php"><i class="fa fa-home"></i> Home </a>
                                   </li>
-
-
-                                  <li>
-                                      <a><i class="fa fa-folder-open-o"></i> Files
-                                          <span class="fa fa-chevron-down"></span></a>
-                                      <ul class="nav child_menu">
+                                  <?php switch ($_SESSION['role']) {
+                                        case "admin":
+                                    ?>
                                           <li>
-                                              <a href="addfile.php">Add files</a>
+                                              <a><i class="fa fa-user"></i> Users
+                                                  <span class="fa fa-chevron-down"></span></a>
+                                              <ul class="nav child_menu">
+                                                  <li>
+                                                      <a href="addusers.php">Add users</a>
+                                                  </li>
+                                                  <li><a href="manageusers.php">Manage users</a></li>
+
+                                              </ul>
                                           </li>
-                                          <li><a href="managefile.php">Manage files</a></li>
-
-                                      </ul>
-                                  </li>
-
-                                  <li>
-                                      <a><i class="fa fa-user"></i> Users
-                                          <span class="fa fa-chevron-down"></span></a>
-                                      <ul class="nav child_menu">
+                                      <?php
+                                        case "creator":
+                                        ?>
                                           <li>
-                                              <a href="addusers.php">Add users</a>
+                                              <a><i class="fa fa-folder-open-o"></i> Files
+                                                  <span class="fa fa-chevron-down"></span></a>
+                                              <ul class="nav child_menu">
+                                                  <li>
+                                                      <a href="addfile.php">Add files</a>
+                                                  </li>
+                                                  <li><a href="managefile.php">Manage files</a></li>
+
+                                              </ul>
                                           </li>
-                                          <li><a href="manageusers.php">Manage users</a></li>
+                                          <li>
+                                              <a><i class="fa fa-folder-open-o"></i> Add Anime_Info
+                                                  <span class="fa fa-chevron-down"></span></a>
+                                              <ul class="nav child_menu">
+                                                  <li>
+                                                      <a href="addanimeinfo.php">Add anime_info</a>
+                                                  </li>
+                                                  <li><a href="manageanimeinfo.php">Manage anime_info</a></li>
 
-                                      </ul>
-                                  </li>
-
+                                              </ul>
+                                          </li>
+                                  <?php
+                                    }
+                                    ?>
 
 
                               </ul>
@@ -104,7 +120,7 @@
                           <ul class="navbar-right">
                               <li class="nav-item dropdown open" style="padding-left: 15px">
                                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                      <img src="images/img.jpg" alt="" />
+                                      <img src="../../Uploads/Pictures/<?php echo $_SESSION['Pic'] ?>" alt="" />
                                       <?php
 
                                         if (isset($_SESSION['username'])) {

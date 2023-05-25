@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])) {
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Manage users</h3>
+                    <h3>Manage anime info</h3>
                 </div>
 
                 <div class="title_right">
@@ -57,34 +57,36 @@ if (!isset($_SESSION['username'])) {
                                 <thead>
                                     <tr>
                                         <th style="width: 1%">I.D</th>
-                                        <th style="width: 20%">User Name</th>
+                                        <th style="width: 20%">Anime Name</th>
                                         <th>Picture</th>
-                                        <th>Email</th>
-                                        <th>Password</th>
-                                        <th>Role</th>
+                                        <th style="width: 20%">Anime Description</th>
+                                        <th>Studios</th>
+                                        <th>Genre</th>
+                                        <th>Views</th>
                                         <th style="width: 20%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql = "SELECT * FROM user";
+                                    $sql = "SELECT * FROM anime_info";
                                     $result = mysqli_query($conn, $sql);
                                     while ($row = $result->fetch_assoc()) {
                                     ?>
                                         <tr>
                                             <td><?php echo $row['id'] ?></td>
 
-                                            <td><?php echo $row['User_Name'] ?></td>
+                                            <td><?php echo $row['Anime_Name'] ?></td>
 
-                                            <td><a href="../../Uploads/Pictures/<?php echo $row['Pic']; ?>" target="_blank"><img src="../../Uploads/Pictures/<?php echo $row['Pic']; ?>" width="70" height="50"></td>
+                                            <td><a href="../../Uploads/Pictures/<?php echo $row['Anime_Img']; ?>" target="_blank"><img src="../../Uploads/Pictures/<?php echo $row['Anime_Img']; ?>" width="70" height="50"></td>
 
-                                            <td><?php echo $row['Email'] ?></td>
+                                            <td><?php echo $row['Anime_Description'] ?></td>
 
-                                            <td><?php echo $row['Password'] ?></td>
+                                            <td><?php echo $row['Studios'] ?></td>
+                                            <td><?php echo $row['Genre'] ?></td>
+                                            <td><?php echo $row['Views'] ?></td>
+
                                             <td>
-                                                <button type="button" class="btn btn-success btn-xs"><?php echo $row['Role'] ?></button>
-                                            </td>
-                                            <td>
+                                                <a href="addanimeinfo.php?id=<?php echo $row['id'] ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                                 <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal">
                                                     <i class="fa fa-trash-o"></i>Delete
                                                 </button>
@@ -107,6 +109,7 @@ if (!isset($_SESSION['username'])) {
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <!-- <a href="addusers.php?id=<?php echo $row['id'] ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a> -->
                                                 <!-- <a href="deleteuser.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a> -->
                                             </td>

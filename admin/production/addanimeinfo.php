@@ -63,32 +63,38 @@ if (!isset($_SESSION['username'])) {
                             <?php
                             if (isset($_GET['id'])) {
                                 $id = $_GET['id'];
-                                $sql = "SELECT * FROM user WHERE id='$id'";
+                                $sql = "SELECT * FROM anime_info WHERE id='$id'";
                                 $result = mysqli_query($conn, $sql);
                                 $row = $result->fetch_assoc();
                             ?>
-                                <form id="demo-form" data-parsley-validate action="users.php" method="post" enctype="multipart/form-data">
-                                    <label for="fullname">User Name * :</label>
-                                    <input type="text" id="fullname" class="form-control" name="fullname" value="<?php echo $row['User_Name'] ?>" />
+                                <form id="demo-form" data-parsley-validate action="animeinfo.php" method="post" enctype="multipart/form-data">
+                                    <label for="anime_name">Anime Name * :</label>
+                                    <input type="text" class="form-control" name="anime_name" value="<?php echo $row['Anime_Name'] ?>" />
 
                                     <input type="number" id="id" class="form-control" name="id" value="<?php echo $row['id'] ?>" hidden />
 
-                                    <label for="email">Email * :</label>
-                                    <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" value="<?php echo $row['Email'] ?>" />
+                                    <label for="file">Image * :</label>
+                                    <input type="file" id="file" class="form-control" name="file" data-parsley-trigger="change" value="<?php echo $row['Anime_Img'] ?>" />
 
-                                    <label for="password">password * :</label>
-                                    <input type="password" id="password" class="form-control" name="password" data-parsley-trigger="change" value="<?php echo $row['Password'] ?>" />
+                                    <label for="Anime_Description">Anime_Description * :</label>
+                                    <textarea name="Anime_Description" id="" rows="3" class="form-control"><?php echo $row['Anime_Description'] ?></textarea>
 
-                                    <label>Role *:</label>
-                                    <p>
-                                        User:
-                                        <input type="radio" class="flat" name="role" id="roleM" value="user" required checked="value=" <?php echo $row['Role'] ?>"" />
-                                        Creator:
+                                    <label for="Studios">Studios * :</label>
+                                    <input type="text" id="Studios" class="form-control" name="Studios" data-parsley-trigger="change" value="<?php echo $row['Studios'] ?>" />
 
-                                        <input type="radio" class="flat" name="role" id="roleF" value="creator" />
-                                        Admin:
-                                        <input type="radio" class="flat" name="role" id="roleF" value="admin" />
-                                    </p>
+                                    <label for="Genre">Genre * :</label>
+                                    <select id="Genre" class="form-control" name="Genre" required>
+                                        <option value="">Choose..</option>
+
+                                        <option value="adventure">adventure</option>
+                                        <option value="action">action</option>
+                                        <option value="romance">romance</option>
+
+                                    </select>
+
+
+
+
 
 
                                     <br />
@@ -105,36 +111,38 @@ if (!isset($_SESSION['username'])) {
                             <?php
                             } else {
                             ?>
-                                <form id="demo-form" data-parsley-validate action="users.php" method="POST" enctype="multipart/form-data">
-                                    <label for="fullname">User Name * :</label>
-                                    <input type="text" id="fullname" class="form-control" name="fullname" required />
+                                <form id="demo-form" data-parsley-validate action="animeinfo.php" method="post" enctype="multipart/form-data">
+                                    <label for="anime_name">Anime Name * :</label>
+                                    <input type="text" class="form-control" name="anime_name" />
 
-                                    <label for="file">Episode file * :</label>
-                                    <input type="file" id="file" class="form-control" name="Picture" data-parsley-trigger="change" required />
 
-                                    <label for="email">Email * :</label>
-                                    <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                                    <label for="file">Image * :</label>
+                                    <input type="file" id="file" class="form-control" name="file" data-parsley-trigger="change" />
 
-                                    <label for="password">password * :</label>
-                                    <input type="password" id="password" class="form-control" name="password" data-parsley-trigger="change" required />
+                                    <label for="Anime_Description">Anime_Description * :</label>
+                                    <input type="text" id="Anime_Description" class="form-control" name="Anime_Description" data-parsley-trigger="change" />
 
-                                    <label>Role *:</label>
-                                    <p>
-                                        User:
-                                        <input type="radio" class="flat" name="role" id="roleM" value="user" required />
-                                        Creator:
-                                        <input type="radio" class="flat" name="role" id="roleF" value="creator" />
-                                        Admin:
-                                        <input type="radio" class="flat" name="role" id="roleF" value="admin" />
-                                    </p>
+                                    <label for="Studios">Studios * :</label>
+                                    <input type="text" id="Studios" class="form-control" name="Studios" data-parsley-trigger="change" />
+
+                                    <label for="Genre">Genre * :</label>
+                                    <select id="Genre" class="form-control" name="Genre" required>
+                                        <option value="">Choose..</option>
+
+                                        <option value="adventure">adventure</option>
+                                        <option value="action">action</option>
+                                        <option value="romance">romance</option>
+
+                                    </select>
 
 
                                     <br />
                                     <div class="form-group">
                                         <div class="col-md-9 col-sm-9  offset-md-3">
-                                            <button type="cancel" class="btn btn-warning">Cancel</button>
+                                            <a class="btn btn-warning" href="manageusers.php" role="button">Cancel</a>
+                                            <!-- <button type="cancel" class="btn btn-warning">Cancel</button> -->
                                             <button type="reset" class="btn btn-danger">Reset</button>
-                                            <button type="submit" class="btn btn-danger" name="submit">submit</button>
+                                            <button type="submit" class="btn btn-primary" name="submit">submit</button>
                                         </div>
                                     </div>
 

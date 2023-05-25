@@ -31,7 +31,7 @@ require('connection/config.php');
                         ?>
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="<?php echo $data["Anime_Img"] ?>">
+                                    <div class="product__item__pic set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
                                         <div class="ep">18 / 18</div>
                                         <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
@@ -41,7 +41,7 @@ require('connection/config.php');
                                             <li>Active</li>
                                             <li>Movie</li>
                                         </ul>
-                                        <h5><a href="anime-details.php"><?php echo $data['Anime_Name'] ?></a></h5>
+                                        <h5><a href="anime-details.php?id=<?php echo $data['id'] ?>"><?php echo $data['Anime_Name'] ?></a></h5>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@ require('connection/config.php');
                                 $data = mysqli_fetch_array($anime_result);
                                 $count += 1;
                             ?>
-                                <div class="product__sidebar__view__item set-bg mix day years" data-setbg="<?php echo $data["Anime_Img"] ?>">
+                                <div class="product__sidebar__view__item set-bg mix day years" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
                                     <div class="ep">18 / ?</div>
                                     <div class="view"><i class="fa fa-eye"></i><?php echo $data['Views'] ?> </div>
                                     <h5><a href="anime-details.php?id=<?php echo $data['id']

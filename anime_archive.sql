@@ -72,7 +72,7 @@ CREATE TABLE `bookmark` (
 
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
-  `Comment` varchar(255) NOT NULL,
+  `comment` varchar(255) NOT NULL,
   `U_Id` int(11) NOT NULL,
   `Created_At` timestamp NOT NULL DEFAULT current_timestamp(),
   `Updated_At` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()

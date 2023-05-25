@@ -16,8 +16,8 @@ $data = mysqli_fetch_assoc($anime_result);
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
-                    <a href="./index.php"><i class="fa fa-home"></i> Home</a>
-                    <a href="#">Categories</a>
+                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                    <a href="./categories.html">Categories</a>
                     <span><?php echo $data['Genre'] ?></span>
                 </div>
             </div>
@@ -169,8 +169,8 @@ $data = mysqli_fetch_assoc($anime_result);
                         $data = mysqli_fetch_array($anime_result);
                         $count += 1;
                     ?>
-                        <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
-                            <div class="ep"><?php echo $data['No_Of_Episodes']  ?></div>
+                        <div class="product__sidebar__view__item set-bg" data-setbg="<?php echo $data["Anime_Img"] ?>">
+                            <div class="ep">18 / ?</div>
                             <div class="view"><i class="fa fa-eye"></i> 9141</div>
                             <h5><a href="anime-details.php?id=<?php echo $data['id']
                                                                 ?>"><?php echo $data['Anime_Name'] ?></a></h5>

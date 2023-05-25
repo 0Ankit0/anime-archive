@@ -16,8 +16,8 @@ $data = mysqli_fetch_assoc($anime_result);
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
-                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                    <a href="./categories.html">Categories</a>
+                    <a href="./index.php"><i class="fa fa-home"></i> Home</a>
+                    <a href="#">Categories</a>
                     <span><?php echo $data['Genre'] ?></span>
                 </div>
             </div>
@@ -112,22 +112,32 @@ $data = mysqli_fetch_assoc($anime_result);
                         $result = mysqli_query($conn, $sql);
 
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $username = $row['username'];
-                            $comment = $row['comment'];
-                            $pic = $row['pic'];
+                            $username = $_SESSION['username'];
+                            $comment = $row['Comment'];
+                            $pic = $_SESSION['Pic'];
+                        ?>
+                            <div class="blog__details__comment__item">
+                                <div class="blog__details__comment__item__pic">
+                                    <img src="Uploads/Pictures/<?php echo $_SESSION['Pic'] ?>" alt="" width="80" height="80" style="border-radius:50%" />
+                                </div>
+                                <div class="blog__details__comment__item__text">
 
-                            echo '<div class="comment">';
-                            echo '<div class="comment__author">';
-                            echo '<img src="' . $pic . '" alt="User Profile Picture">';
-                            echo '<span>' . $username . '</span>';
-                            echo '</div>';
-                            echo '<div class="comment__content">';
-                            echo '<p>' . $comment . '</p>';
-                            echo '</div>';
-                            echo '</div>';
+                                    <span><?php echo date('Y-m-d', strtotime($row["Created_At"])) ?></span>
+                                    <h5><?php echo $username ?></h5>
+                                    <p><?php echo $comment ?></p>
+                                    <span>
+
+                                        <?php echo $row['Like'] ?>
+                                        <a href="#">Like</a></span>
+
+                                </div>
+                            </div>
+                        <?php
                         }
                         ?>
                     </div>
+
+
                 </div>
                 <?php
                 // Only logged-in users can see the comment form
@@ -160,9 +170,10 @@ $data = mysqli_fetch_assoc($anime_result);
                         $count += 1;
                     ?>
                         <div class="product__sidebar__view__item set-bg" data-setbg="<?php echo $data["Anime_Img"] ?>">
-                            <div class="ep">18 / ?</div>
+                            <div class="ep"><?php echo $data['No_Of_Episodes']  ?></div>
                             <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="#"><?php echo $data['Anime_Name'] ?></a></h5>
+                            <h5><a href="anime-details.php?id=<?php echo $data['id']
+                                                                ?>"><?php echo $data['Anime_Name'] ?></a></h5>
                         </div>
                     <?php
                     }

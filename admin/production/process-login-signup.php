@@ -12,7 +12,6 @@ if (isset($_POST['Login'])) {
         session_start();
         $_SESSION['username'] = $row['User_Name'];
         $_SESSION['role'] = $row['Role'];
-        $_SESSION['role'] = $row['Role'];
         $_SESSION['Pic'] = $row['Pic'];
 
         switch ($row['Role']) {

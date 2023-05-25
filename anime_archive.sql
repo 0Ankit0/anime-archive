@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2023 at 02:21 PM
+-- Generation Time: May 25, 2023 at 11:00 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -72,11 +72,19 @@ CREATE TABLE `bookmark` (
 
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
-  `comment` varchar(255) NOT NULL,
+  `Comment` varchar(255) NOT NULL,
   `U_Id` int(11) NOT NULL,
+  `Like` int(5) NOT NULL,
   `Created_At` timestamp NOT NULL DEFAULT current_timestamp(),
   `Updated_At` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `Comment`, `U_Id`, `Like`, `Created_At`, `Updated_At`) VALUES
+(2, 'hi', 11, 0, '2023-05-25 02:32:00', '2023-05-25 02:32:00');
 
 -- --------------------------------------------------------
 
@@ -100,9 +108,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `User_Name`, `Pic`, `Email`, `Password`, `Role`, `Created_At`, `Updated_At`) VALUES
-(5, 'user', '', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', '2023-05-13 07:59:13', '2023-05-14 01:10:39'),
-(7, 'creator', '', 'creator@gmail.com', 'ee2433259b0fe399b40e81d2c98a38b6', 'creator', '2023-05-14 01:08:28', '2023-05-17 10:40:46'),
-(10, 'admin', 'Screenshot_20211024-183436.png', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', '2023-05-24 12:01:35', '2023-05-24 12:01:35');
+(10, 'admin', 'Screenshot_20211024-183436.png', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', '2023-05-24 12:01:35', '2023-05-24 12:01:35'),
+(11, 'user', 'pic.png', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', '2023-05-25 01:50:37', '2023-05-25 01:53:03'),
+(12, 'creator', 'Screenshot_20211223-200824.png', 'creator@gmail.com', 'ee2433259b0fe399b40e81d2c98a38b6', 'creator', '2023-05-25 02:45:26', '2023-05-25 02:45:26');
 
 -- --------------------------------------------------------
 
@@ -135,7 +143,8 @@ INSERT INTO `videos` (`id`, `Episode_Name`, `Ep_Video`, `A_Name`, `ext`, `Create
 -- Indexes for table `anime_info`
 --
 ALTER TABLE `anime_info`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `Anime_Name` (`Anime_Name`);
 
 --
 -- Indexes for table `bookmark`
@@ -150,7 +159,7 @@ ALTER TABLE `bookmark`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `A_Id` (`U_Id`);
+  ADD KEY `U_Id` (`U_Id`);
 
 --
 -- Indexes for table `user`
@@ -162,7 +171,8 @@ ALTER TABLE `user`
 -- Indexes for table `videos`
 --
 ALTER TABLE `videos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `A_Name` (`A_Name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -178,19 +188,42 @@ ALTER TABLE `anime_info`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bookmark`
+--
+ALTER TABLE `bookmark`
+  ADD CONSTRAINT `bookmark_ibfk_1` FOREIGN KEY (`A_Id`) REFERENCES `anime_info` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `bookmark_ibfk_2` FOREIGN KEY (`U_Id`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`U_Id`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `videos`
+--
+ALTER TABLE `videos`
+  ADD CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`A_Name`) REFERENCES `anime_info` (`Anime_Name`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -268,18 +268,15 @@ ol {
 
 .spacial-controls .search-switch {
 	display: block;
-	height: 100%;
-	padding-top: 30px;
+	
 	background: #323232;
-	text-align: center;
 	cursor: pointer;
 }
 
 .search-model {
 	display: none;
 	position: fixed;
-	width: 100%;
-	height: 100%;
+	
 	left: 0;
 	top: 0;
 	background: #000;

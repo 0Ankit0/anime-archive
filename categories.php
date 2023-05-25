@@ -64,7 +64,8 @@ require('connection/config.php');
                                             <li>Active</li>
                                             <li>Movie</li>
                                         </ul>
-                                        <h5><a href="anime-details.php"><?php echo $data['Anime_Name'] ?></a></h5>
+                                        <h5><a href="anime-details.php?id=<?php echo $data['id']
+                                                                            ?>"><?php echo $data['Anime_Name'] ?></a></h5>
                                     </div>
                                 </div>
                             </div>

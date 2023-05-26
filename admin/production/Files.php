@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
     $fileextension = strtolower($fileextension);
 
     if (isset($name)) {
-        $path = 'Uploads/videos/';
+        $path = '../../Uploads/videos/';
         if (!empty($name)) {
             if (($fileextension !== "mp4") && ($fileextension !== "ogg") && ($fileextension !== "webm")) {
                 $success = 0;

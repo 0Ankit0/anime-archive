@@ -15,15 +15,30 @@ if (!isset($_SESSION['username'])) {
                 </div>
 
                 <div class="title_right">
-                    <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="button">Go!</button>
-                            </span>
-                        </div>
+                    <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                        <form id="searchForm" action="" method="GET">
+                            <div class="input-group">
+                                <input id="searchInput" name="search" type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button id="searchButton" class="btn btn-secondary" type="submit">Go!</button>
+                                </span>
+                            </div>
+                        </form>
                     </div>
                 </div>
+                <script>
+                    $(document).ready(function() {
+                        // Submit the form with the searched value
+                        $('#searchForm').submit(function(event) {
+                            var searchedValue = $('#searchInput').val();
+                            if (searchedValue !== '') {
+                                var updatedURL = window.location.pathname + '?search=' + encodeURIComponent(searchedValue);
+                                window.location.href = updatedURL;
+                            }
+                            event.preventDefault(); // Prevent the form from submitting normally
+                        });
+                    });
+                </script>
             </div>
 
             <div class="clearfix"></div>
@@ -65,57 +80,118 @@ if (!isset($_SESSION['username'])) {
                                         <th style="width: 20%">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php
-                                    $sql = "SELECT * FROM user";
-                                    $result = mysqli_query($conn, $sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $row['id'] ?></td>
+                                <?php
+                                if (isset($_GET['search'])) {
+                                ?>
+                                    <tbody>
+                                        <?php
+                                        $searchedValue = $_GET['search'];
+                                        $sql = "SELECT * FROM user WHERE User_Name LIKE '%$searchedValue%'";
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($row = $result->fetch_assoc()) {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $row['id'] ?></td>
 
-                                            <td><?php echo $row['User_Name'] ?></td>
+                                                <td><?php echo $row['User_Name'] ?></td>
 
-                                            <td><a href="../../Uploads/Pictures/<?php echo $row['Pic']; ?>" target="_blank"><img src="../../Uploads/Pictures/<?php echo $row['Pic']; ?>" width="70" height="50"></td>
+                                                <td><a href="../../Uploads/Pictures/<?php echo $row['Pic']; ?>" target="_blank"><img src="../../Uploads/Pictures/<?php echo $row['Pic']; ?>" width="70" height="50"></td>
 
-                                            <td><?php echo $row['Email'] ?></td>
+                                                <td><?php echo $row['Email'] ?></td>
 
-                                            <td><?php echo $row['Password'] ?></td>
-                                            <td>
-                                                <button type="button" class="btn btn-success btn-xs"><?php echo $row['Role'] ?></button>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal">
-                                                    <i class="fa fa-trash-o"></i>Delete
-                                                </button>
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Are You sure You want to delete the file?</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                By clicking the confirm button the data stored in the database will be lost forever.
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <a href="deleteuser.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Confirm</a>
+                                                <td><?php echo $row['Password'] ?></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-success btn-xs"><?php echo $row['Role'] ?></button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal">
+                                                        <i class="fa fa-trash-o"></i>Delete
+                                                    </button>
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Are You sure You want to delete the file?</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    By clicking the confirm button the data stored in the database will be lost forever.
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <a href="deleteuser.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Confirm</a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <!-- <a href="addusers.php?id=<?php echo $row['id'] ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a> -->
-                                                <!-- <a href="deleteuser.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a> -->
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
+                                                    <!-- <a href="addusers.php?id=<?php echo $row['id'] ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a> -->
+                                                    <!-- <a href="deleteuser.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a> -->
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
 
-                                </tbody>
+                                    </tbody>
+                                <?php
+                                } else {
+                                ?>
+                                    <tbody>
+                                        <?php
+                                        $sql = "SELECT * FROM user";
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($row = $result->fetch_assoc()) {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $row['id'] ?></td>
+
+                                                <td><?php echo $row['User_Name'] ?></td>
+
+                                                <td><a href="../../Uploads/Pictures/<?php echo $row['Pic']; ?>" target="_blank"><img src="../../Uploads/Pictures/<?php echo $row['Pic']; ?>" width="70" height="50"></td>
+
+                                                <td><?php echo $row['Email'] ?></td>
+
+                                                <td><?php echo $row['Password'] ?></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-success btn-xs"><?php echo $row['Role'] ?></button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal">
+                                                        <i class="fa fa-trash-o"></i>Delete
+                                                    </button>
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Are You sure You want to delete the file?</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    By clicking the confirm button the data stored in the database will be lost forever.
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <a href="deleteuser.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Confirm</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <a href="addusers.php?id=<?php echo $row['id'] ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a> -->
+                                                    <!-- <a href="deleteuser.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a> -->
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+
+                                    </tbody>
+                                <?php
+                                }
+                                ?>
                             </table>
                             <!-- end project list -->
 

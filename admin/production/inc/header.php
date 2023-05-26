@@ -33,6 +33,9 @@
 
     <!-- Animate.css -->
     <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <?php
 require('../../connection/config.php');

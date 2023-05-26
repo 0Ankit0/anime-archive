@@ -67,7 +67,19 @@ $data = mysqli_fetch_assoc($anime_result);
                                 <div class="col-lg-6 col-md-6">
                                     <ul>
                                         <li><span>Rating:</span> 8.5 / 161 times</li>
-                                        <li><span>Genre:</span> Action, Adventure, Fantasy, Magic</li>
+                                        <li><span>Genre:</span>
+                                            <?php
+                                            $values = explode(',', $data['Genre']);
+                                            // Loop through the array of values
+
+                                            foreach ($values as $value) {
+                                            ?>
+                                                <?php echo $value, " " ?>
+                                            <?php
+
+                                            }
+                                            ?>
+                                        </li>
                                         <li><span>Views:</span> <?php echo $data["Views"] ?></li>
 
                                     </ul>

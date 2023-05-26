@@ -6,7 +6,12 @@ if (isset($_POST['update'])) {
     $Anime_Description = $_POST['Anime_Description'];
     $Studios = $_POST['Studios'];
     $id = $_POST['id'];
-    $Genre = $_POST['Genre'];
+
+    $checkbox1 = $_POST['Genre'];
+    $Genre = "";
+    foreach ($checkbox1 as $chk1) {
+        $Genre .= $chk1 . ",";
+    }
 
     $name = $_FILES['file']['name'];
     $tmp_name = $_FILES['file']['tmp_name'];
@@ -34,7 +39,11 @@ if (isset($_POST['submit'])) {
     $anime_name = $_POST['anime_name'];
     $Anime_Description = $_POST['Anime_Description'];
     $Studios = $_POST['Studios'];
-    $Genre = $_POST['Genre'];
+    $checkbox1 = $_POST['Genre'];
+    $Genre = "";
+    foreach ($checkbox1 as $chk1) {
+        $Genre .= $chk1 . ",";
+    }
 
     $name = $_FILES['file']['name'];
     $tmp_name = $_FILES['file']['tmp_name'];

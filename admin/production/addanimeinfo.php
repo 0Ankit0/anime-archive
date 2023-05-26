@@ -82,15 +82,15 @@ if (!isset($_SESSION['username'])) {
                                     <label for="Studios">Studios * :</label>
                                     <input type="text" id="Studios" class="form-control" name="Studios" data-parsley-trigger="change" value="<?php echo $row['Studios'] ?>" />
 
-                                    <label for="Genre">Genre * :</label>
-                                    <select id="Genre" class="form-control" name="Genre" required>
-                                        <option value="">Choose..</option>
-
-                                        <option value="adventure">adventure</option>
-                                        <option value="action">action</option>
-                                        <option value="romance">romance</option>
-
-                                    </select>
+                                    <label for="Genre">Genre * :</label><br>
+                                    <input type="checkbox" name="Genre[]" value="action"> action<br>
+                                    <input type="checkbox" name="Genre[]" value="adventure"> adventure<br>
+                                    <input type="checkbox" name="Genre[]" value="fantasy"> fantasy<br>
+                                    <input type="checkbox" name="Genre[]" value="romance"> romance <br>
+                                    <input type="checkbox" name="Genre[]" value="slice_of_life"> slice of life<br>
+                                    <input type="checkbox" name="Genre[]" value="comedy"> comedy <br>
+                                    <input type="checkbox" name="Genre[]" value="sports"> sports<br>
+                                    <input type="checkbox" name="Genre[]" value="music"> music <br>
 
 
 
@@ -120,20 +120,20 @@ if (!isset($_SESSION['username'])) {
                                     <input type="file" id="file" class="form-control" name="file" data-parsley-trigger="change" />
 
                                     <label for="Anime_Description">Anime_Description * :</label>
-                                    <input type="text" id="Anime_Description" class="form-control" name="Anime_Description" data-parsley-trigger="change" />
+                                    <textarea name="Anime_Description" id="" rows="3" class="form-control"></textarea>
 
                                     <label for="Studios">Studios * :</label>
                                     <input type="text" id="Studios" class="form-control" name="Studios" data-parsley-trigger="change" />
 
-                                    <label for="Genre">Genre * :</label>
-                                    <select id="Genre" class="form-control" name="Genre" required>
-                                        <option value="">Choose..</option>
-
-                                        <option value="adventure">adventure</option>
-                                        <option value="action">action</option>
-                                        <option value="romance">romance</option>
-
-                                    </select>
+                                    <label for="Genre">Genre * :</label><br>
+                                    <input type="checkbox" name="Genre[]" value="action"> action<br>
+                                    <input type="checkbox" name="Genre[]" value="adventure"> adventure<br>
+                                    <input type="checkbox" name="Genre[]" value="fantasy"> fantasy<br>
+                                    <input type="checkbox" name="Genre[]" value="romance"> romance <br>
+                                    <input type="checkbox" name="Genre[]" value="slice_of_life"> slice of life<br>
+                                    <input type="checkbox" name="Genre[]" value="comedy"> comedy <br>
+                                    <input type="checkbox" name="Genre[]" value="sports"> sports<br>
+                                    <input type="checkbox" name="Genre[]" value="music"> music <br>
 
 
                                     <br />

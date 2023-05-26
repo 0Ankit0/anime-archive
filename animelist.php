@@ -38,8 +38,18 @@ require('connection/config.php');
                                     </div>
                                     <div class="product__item__text">
                                         <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
+                                            <?php
+                                            $values = explode(',', $data['Genre']);
+                                            // Loop through the array of values
+                                            $count = 0;
+                                            foreach ($values as $value) {
+                                                if ($count < 3) { ?>
+                                                    <li><?php echo $value ?></li>
+                                            <?php
+                                                    $count++;
+                                                }
+                                            }
+                                            ?>
                                         </ul>
                                         <h5><a href="anime-details.php?id=<?php echo $data['id'] ?>"><?php echo $data['Anime_Name'] ?></a></h5>
                                     </div>

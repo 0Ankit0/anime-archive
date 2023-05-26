@@ -12,7 +12,7 @@ require('connection/config.php');
             $slider_count_query = "SELECT * FROM `anime_info`";
             $slider_count_result = mysqli_query($conn, $slider_count_query);
             $count = 0;
-            while ($count < 3) {
+            while ($count < 5) {
                 $data = mysqli_fetch_assoc($slider_count_result);
                 $count += 1;
             ?>
@@ -20,7 +20,16 @@ require('connection/config.php');
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
-                                <div class="label"><?php echo $data['Genre'] ?></div>
+                                <?php
+                                $values = explode(',', $data['Genre']);
+
+                                // Loop through the array of values
+                                foreach ($values as $value) { ?>
+                                    <div class="label"><?php echo $value ?></div>
+
+                                <?php
+                                }
+                                ?>
                                 <h2><?php echo $data['Anime_Name'] ?></h2>
                                 <p><?php echo $data['Anime_Description'] ?></p>
                                 <a href="anime-details.php?id=<?php echo $data['id'] ?>"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
@@ -42,6 +51,7 @@ require('connection/config.php');
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+
                 <div class="trending__product">
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-8">
@@ -57,7 +67,7 @@ require('connection/config.php');
                     </div>
                     <div class="row">
                         <?php
-                        $anime_query = "SELECT * FROM `anime_info`";
+                        $anime_query = "SELECT * FROM `anime_info`  WHERE Genre LIKE '%adventure%'";
                         $anime_result = mysqli_query($conn, $anime_query);
                         $count = 0;
                         while ($count < 3) {
@@ -73,8 +83,18 @@ require('connection/config.php');
                                     </div>
                                     <div class="product__item__text">
                                         <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
+                                            <?php
+                                            $values = explode(',', $data['Genre']);
+                                            // Loop through the array of values
+                                            $count = 0;
+                                            foreach ($values as $value) {
+                                                if ($count < 3) { ?>
+                                                    <li><?php echo $value ?></li>
+                                            <?php
+                                                    $count++;
+                                                }
+                                            }
+                                            ?>
                                         </ul>
                                         <h5><a href="anime-details.php?id=<?php echo $data['id'] ?>"><?php echo $data['Anime_Name'] ?></a></h5>
                                     </div>
@@ -101,7 +121,7 @@ require('connection/config.php');
                     </div>
                     <div class="row">
                         <?php
-                        $anime_query = "SELECT * FROM `anime_info` ORDER BY `id` DESC";
+                        $anime_query = "SELECT * FROM `anime_info` WHERE Genre LIKE '%action%'";
                         $anime_result = mysqli_query($conn, $anime_query);
                         $count = 0;
                         while ($count < 3) {
@@ -117,8 +137,18 @@ require('connection/config.php');
                                     </div>
                                     <div class="product__item__text">
                                         <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
+                                            <?php
+                                            $values = explode(',', $data['Genre']);
+                                            // Loop through the array of values
+                                            $count = 0;
+                                            foreach ($values as $value) {
+                                                if ($count < 3) { ?>
+                                                    <li><?php echo $value ?></li>
+                                            <?php
+                                                    $count++;
+                                                }
+                                            }
+                                            ?>
                                         </ul>
                                         <h5><a href="anime-details.php?id=<?php echo $data['id'] ?>"><?php echo $data['Anime_Name'] ?></a></h5>
                                     </div>
@@ -145,7 +175,7 @@ require('connection/config.php');
                     </div>
                     <div class="row">
                         <?php
-                        $anime_query = "SELECT * FROM `anime_info`  ORDER BY `id` ASC";
+                        $anime_query = "SELECT * FROM `anime_info`  WHERE Genre LIKE '%fantasy%'";
                         $anime_result = mysqli_query($conn, $anime_query);
                         $count = 0;
                         while ($count < 3) {
@@ -161,8 +191,18 @@ require('connection/config.php');
                                     </div>
                                     <div class="product__item__text">
                                         <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
+                                            <?php
+                                            $values = explode(',', $data['Genre']);
+                                            // Loop through the array of values
+                                            $count = 0;
+                                            foreach ($values as $value) {
+                                                if ($count < 3) { ?>
+                                                    <li><?php echo $value ?></li>
+                                            <?php
+                                                    $count++;
+                                                }
+                                            }
+                                            ?>
                                         </ul>
                                         <h5><a href="anime-details.php?id=<?php echo $data['id']
                                                                             ?>"><?php echo $data['Anime_Name'] ?></a></h5>

@@ -184,3 +184,13 @@ $data = mysqli_fetch_assoc($anime_result);
                     <?php
                     }
                     ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Anime Section End -->
+<?php
+require('inc/footer.php')
+?>

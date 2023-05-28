@@ -45,12 +45,20 @@
     $('.search-switch').on('click', function () {
         $('.search-model').fadeIn(400);
     });
-
+    
     $('.search-close-switch').on('click', function () {
         $('.search-model').fadeOut(400, function () {
-            $('#search-input').val('');
+            
         });
     });
+    // search result
+   $('.search-results').on('click', function () {
+    var searchedValue = $('#searchInput').val();
+    if (searchedValue !== '') {
+        var updatedURL = 'search.php?search=' + encodeURIComponent(searchedValue);
+        window.location.href = updatedURL;
+    }
+});
 
     /*------------------
         Navigation

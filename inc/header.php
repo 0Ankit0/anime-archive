@@ -60,7 +60,7 @@
                 <div class="col-lg-2">
                     <div class="header__right">
                         <p style="color:whitesmoke">
-                            <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                            <a class="search-switch"><span class="icon_search"></span></a>
                             <a href="
                             <?php
                             if (isset($_SESSION['username'])) {

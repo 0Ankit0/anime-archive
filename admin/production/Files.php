@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     $epname = $_POST['epname'];
     $animeName = $_POST['animeName'];
 
-    $name = $_FILES['file']['name'];
+    $name = $animeName . $_FILES['file']['name'];
     $tmp_name = $_FILES['file']['tmp_name'];
 
     $position = strpos($name, ".");

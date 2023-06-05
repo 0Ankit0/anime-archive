@@ -46,14 +46,15 @@ $data = mysqli_fetch_assoc($anime_result);
                         </div>
                         <div class="anime__details__rating">
                             <div class="rating">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star-half-o"></i></a>
+                                <a href="#" class="star" data-value="1"><i class="fa fa-star"></i></a>
+                                <a href="#" class="star" data-value="2"><i class="fa fa-star"></i></a>
+                                <a href="#" class="star" data-value="3"><i class="fa fa-star"></i></a>
+                                <a href="#" class="star" data-value="4"><i class="fa fa-star"></i></a>
+                                <a href="#" class="star" data-value="5"><i class="fa fa-star-half-o"></i></a>
                             </div>
-                            <span>1.029 Votes</span>
+                            <span id="votes">1.029 Votes</span>
                         </div>
+
                         <p><?php echo $data["Anime_Description"] ?></p>
                         <div class="anime__details__widget">
                             <div class="row">
@@ -104,7 +105,7 @@ $data = mysqli_fetch_assoc($anime_result);
                     while ($data = mysqli_fetch_array($result)) {;
 
                     ?>
-                        <a href="anime-watching.php?animename=<?php echo $name ?>&epname=<?php echo $data['Episode_Name'] ?>"><?php echo $data['Episode_Name'] ?></a>
+                        <a href="increaseviews.php?animename=<?php echo $name ?>&epname=<?php echo $data['Episode_Name'] ?>"><?php echo $data['Episode_Name'] ?></a>
                     <?php
                     }
                     ?>

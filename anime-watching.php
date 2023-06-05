@@ -6,7 +6,7 @@ require('connection/config.php');
 
 <?php
 $epname = $_GET['epname'];
-echo $epname;
+
 $query0 = "SELECT * FROM `videos` WHERE `Episode_Name`='$epname' ";
 $result0 = mysqli_query($conn, $query0);
 $data0 = mysqli_fetch_assoc($result0);
@@ -62,7 +62,7 @@ $data1 = mysqli_fetch_assoc($result1);
                     while ($data = mysqli_fetch_assoc($result)) {;
 
                     ?>
-                        <a href="anime-watching.php?name=<?php echo $data['Episode_Name'] ?>"><?php echo $data['Episode_Name'] ?></a>
+                       <a href="increaseviews.php?animename=<?php echo $name ?>&epname=<?php echo $data['Episode_Name'] ?>"><?php echo $data['Episode_Name'] ?></a>
                     <?php
                     }
                     ?>

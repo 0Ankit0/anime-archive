@@ -8,7 +8,7 @@ require('connection/config.php');
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
-                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                    <a href="./index.php"><i class="fa fa-home"></i> Home</a>
                     <a href="#">Categories</a>
                     <span><?php echo $_GET['category'] ?></span>
                 </div>
@@ -32,14 +32,14 @@ require('connection/config.php');
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="product__page__filter">
+                                <!-- <div class="product__page__filter">
                                     <p>Order by:</p>
                                     <select>
                                         <option value="">A-Z</option>
                                         <option value="">1-10</option>
                                         <option value="">10-50</option>
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -53,9 +53,10 @@ require('connection/config.php');
                             $count += 1;
                         ?>
                             <div class="col-lg-4 col-md-6 col-sm-6">
+                                <a href="anime-details.php?id=<?php echo $data['id']
+                                                                            ?>">
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
-                                        <div class="ep">18 / 18</div>
                                         <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     </div>
@@ -64,9 +65,9 @@ require('connection/config.php');
                                             <li>Active</li>
                                             <li>Movie</li>
                                         </ul>
-                                        <h5><a href="anime-details.php?id=<?php echo $data['id']
-                                                                            ?>"><?php echo $data['Anime_Name'] ?></a></h5>
+                                        <h5><?php echo $data['Anime_Name'] ?></h5>
                                     </div>
+                                    </a>
                                 </div>
                             </div>
                         <?php
@@ -106,7 +107,6 @@ require('connection/config.php');
                                 $count += 1;
                             ?>
                                 <div class="product__sidebar__view__item set-bg mix day years" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
-                                    <div class="ep">18 / ?</div>
                                     <div class="view"><i class="fa fa-eye"></i><?php echo $data['Views'] ?> </div>
                                     <h5><a href="anime-details.php?id=<?php echo $data['id']
                                                                         ?>"><?php echo $data['Anime_Name'] ?></a></h5>

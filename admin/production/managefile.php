@@ -105,9 +105,16 @@ if (!isset($_SESSION['username'])) {
 
                                                 <td>
                                                     <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal">
+                                                    <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $row['id']; ?>">
                                                         <i class="fa fa-trash-o"></i>Delete
                                                     </button>
+                                                    <script>
+                                                        // Get the ID value when the delete button is clicked
+                                                        $('.delete-button').on('click', function() {
+                                                            var id = $(this).data('id');
+                                                            $('#confirmDelete').attr('href', 'deletefile.php?id=' + id);
+                                                        });
+                                                    </script>
 
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -124,7 +131,8 @@ if (!isset($_SESSION['username'])) {
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <a href="deletefile.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Confirm</a>
+                                                                    <a id="confirmDelete" href="#" class="btn btn-danger">Confirm</a>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -154,8 +162,7 @@ if (!isset($_SESSION['username'])) {
 
                                                 <td>
                                                     <video width='120' height="60" controls>
-                                                        <source src='../../Uploads/videos/<?php echo $row['Ep_Video']
-                                                                                            ?>' type='video/<?php echo $row['ext'] ?>'>Your browser doesnot support the video tag.
+                                                        <source src='../../Uploads/videos/<?php echo $row['A_Name'] ?>/<?php echo $row['Ep_Video'] ?>' type='video/<?php echo $row['ext'] ?>'>Your browser doesnot support the video tag.
                                                     </video>
                                                 </td>
 
@@ -163,9 +170,19 @@ if (!isset($_SESSION['username'])) {
 
                                                 <td>
                                                     <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal">
+                                                    <!-- <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal">
+                                                        <i class="fa fa-trash-o"></i>Delete
+                                                    </button> -->
+                                                    <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $row['id']; ?>">
                                                         <i class="fa fa-trash-o"></i>Delete
                                                     </button>
+                                                    <script>
+                                                        // Get the ID value when the delete button is clicked
+                                                        $('.delete-button').on('click', function() {
+                                                            var id = $(this).data('id');
+                                                            $('#confirmDelete').attr('href', 'deletefile.php?id=' + id);
+                                                        });
+                                                    </script>
 
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -182,7 +199,9 @@ if (!isset($_SESSION['username'])) {
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <a href="deletefile.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Confirm</a>
+                                                                    <!-- <a href="deletefile.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Confirm</a> -->
+                                                                    <a id="confirmDelete" href="#" class="btn btn-danger">Confirm</a>
+
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     $epname = $_POST['epname'];
     $animeName = $_POST['animeName'];
 
-    $name = $animeName . $_FILES['file']['name'];
+    $name =  $_FILES['file']['name'];
     $tmp_name = $_FILES['file']['tmp_name'];
 
     $position = strpos($name, ".");
@@ -26,7 +26,9 @@ if (isset($_POST['submit'])) {
     $fileextension = strtolower($fileextension);
 
     if (isset($name)) {
-        $path = '../../Uploads/videos/';
+       
+        $mkdir = mkdir('../../Uploads/videos/'.$animeName);
+    $path = '../../Uploads/videos/'.$animeName.'/';
         if (!empty($name)) {
             if (($fileextension !== "mp4") && ($fileextension !== "ogg") && ($fileextension !== "webm")) {
                 $success = 0;

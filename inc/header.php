@@ -52,7 +52,7 @@
                             <ul>
                                 <li><a href="./index.php">Homepage</a></li>
                                 <li><a href="./animelist.php">Anime list</a></li>
-                                <li><a href="#">Contacts</a></li>
+                                <li><a href="./profile.php">Profile</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -73,7 +73,11 @@
                                 <?php
 
                                 if (isset($_SESSION['username'])) {
+                                    if($_SESSION['role']=='admin' || $_SESSION['role']=='creator'){
+                                        header('location:admin/production/logout.php');
+                                    }else{
                                     echo $_SESSION['username'];
+                                    }
                                 }
 
                                 ?>

@@ -104,9 +104,16 @@ if (!isset($_SESSION['username'])) {
                                                     <button type="button" class="btn btn-success btn-xs"><?php echo $row['Role'] ?></button>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal">
+                                                    <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $row['id']; ?>">
                                                         <i class="fa fa-trash-o"></i>Delete
                                                     </button>
+                                                    <script>
+                                                        // Get the ID value when the delete button is clicked
+                                                        $('.delete-button').on('click', function() {
+                                                            var id = $(this).data('id');
+                                                            $('#confirmDelete').attr('href', 'deletefile.php?id=' + id);
+                                                        });
+                                                    </script>
                                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -121,7 +128,8 @@ if (!isset($_SESSION['username'])) {
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <a href="deleteuser.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Confirm</a>
+                                                                    <a id="confirmDelete" href="#" class="btn btn-danger">Confirm</a>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -158,9 +166,16 @@ if (!isset($_SESSION['username'])) {
                                                     <button type="button" class="btn btn-success btn-xs"><?php echo $row['Role'] ?></button>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal">
+                                                    <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $row['id']; ?>">
                                                         <i class="fa fa-trash-o"></i>Delete
                                                     </button>
+                                                    <script>
+                                                        // Get the ID value when the delete button is clicked
+                                                        $('.delete-button').on('click', function() {
+                                                            var id = $(this).data('id');
+                                                            $('#confirmDelete').attr('href', 'deletefile.php?id=' + id);
+                                                        });
+                                                    </script>
                                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -175,7 +190,8 @@ if (!isset($_SESSION['username'])) {
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <a href="deleteuser.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Confirm</a>
+                                                                    <a id="confirmDelete" href="#" class="btn btn-danger">Confirm</a>
+
                                                                 </div>
                                                             </div>
                                                         </div>

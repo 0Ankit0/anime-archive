@@ -11,7 +11,22 @@
 
 (function ($) {
 
+ $(".rating .star").click(function (e) {
+   e.preventDefault();
 
+   var ratingValue = $(this).data("value");
+
+   // Send the rating value to the server or perform other actions
+   // You can use AJAX to send the value to the server
+
+   // Update the UI to reflect the selected rating
+   $(".rating .star").removeClass("selected");
+   $(this).addClass("selected");
+
+   // Update the vote count
+   var votes = parseInt($("#votes").text());
+   $("#votes").text(votes + 1 + " Votes");
+ });
     /*------------------
         Preloader
     --------------------*/

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2023 at 11:00 AM
+-- Generation Time: Jun 07, 2023 at 03:28 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,9 +46,11 @@ CREATE TABLE `anime_info` (
 --
 
 INSERT INTO `anime_info` (`id`, `Anime_Name`, `No_Of_Episodes`, `Anime_Img`, `Anime_Description`, `Studios`, `Genre`, `Rating`, `Views`, `Created_At`, `Updated_At`) VALUES
-(1, 'One Piece', 0, 'https://static.bunnycdn.ru/i/cache/images/5/58/5806a16f2892768b4930c39ebf6ce756.jpg', 'The Pirate King, Gol D. Roger, struck fear into the hearts of all who sailed the Grand Line with his unmatched strength and notorious reputation. However, his downfall at the hands of the World Government instigated a momentous shift in the world. Roger\'s final words divulged...', 'Toei Animation', 'Action', 5, 50, '2023-05-06 18:15:00', '2023-05-16 13:08:25'),
-(2, 'MASHLE: MAGIC AND MUSCLES', 0, 'https://static.bunnycdn.ru/i/cache/images/a/a9/a9b1f759ee2b267d54b5e190210183a7.jpg', 'In a world where magic reigns supreme, Mash Burnedead suffers from the disadvantage of being young and without power. Perceived as a danger to the purity of the gene pool, he\'s forced to hide in the forest and dedicate himself to daily physical training. His goal: to develop...', 'A-1 Pictures', 'adventure', 4, 0, '2023-05-06 18:15:00', '2023-05-07 04:58:11'),
-(3, 'Oshi No Ko', 0, 'https://static.bunnycdn.ru/i/cache/images/a/ac/ac328030476f399d5513a6d5f4dc325c.jpg', 'Ai Hoshino, a youthful and beautiful idol, is highly revered by her adoring fans as the epitome of innocence and purity. However, her pristine image is merely a facade.\r\nGorou Amemiya, a country-side gynecologist and passionate devotee of Ai, is astounded ...', 'Doga Kobo', 'Adventure', 4, 200, '2023-05-06 18:15:00', '2023-05-16 13:07:26');
+(1, 'One Piece', 0, 'one_piece.jpg', 'The Pirate King, Gol D. Roger, struck fear into the hearts of all who sailed the Grand Line with his unmatched strength and notorious reputation. However, his downfall at the hands of the World Government instigated a momentous shift in the world. His final words divulged...', 'Toei Animation', 'action', 5, 31, '2023-05-06 18:15:00', '2023-06-07 01:27:17'),
+(2, 'MASHLE- MAGIC AND MUSCLES', 0, 'Screenshot_20211201-173054.png', 'In a world where magic reigns supreme, Mash Burnedead suffers from the disadvantage of being young and without power. Perceived as a danger to the purity of the gene pool, he is forced to hide in the forest and dedicate himself to daily physical training. His goal: to develop...', 'A-1 Pictures', 'romance', 4, 32, '2023-05-06 18:15:00', '2023-06-05 10:20:06'),
+(3, 'Oshi No Ko', 0, 'Screenshot_20211223-200824.png', 'Ai Hoshino, a youthful and beautiful idol, is highly revered by her adoring fans as the epitome of innocence and purity. However, her pristine image is merely a facade.\r\nGorou Amemiya, a country-side gynecologist and passionate devotee of Ai, is astounded ...', 'Doga Kobo', 'adventure', 4, 200, '2023-05-06 18:15:00', '2023-05-25 11:45:19'),
+(4, 'Brawl stars', 0, 'Screenshot_20211024-183436.png', 'this is brawl stars', 'Ankit', 'action', 0, 0, '2023-05-25 11:04:56', '2023-05-25 11:04:56'),
+(5, 'The legendary hero is dead', 0, 'the-hero-is-dead.jpg', 'Amidst a realm of enchantment and fearsome creatures, the valiant Sion sets forth to rescue humanity from the clutches of demons. However, his mission takes an unexpected turn when he tumbles into a hole cunningly crafted by a deceitful local named Touka, and meets his ...', 'lidenfilms', 'action,adventure,fantasy,romance,comedy,', 0, 0, '2023-05-26 00:38:42', '2023-05-26 00:51:30');
 
 -- --------------------------------------------------------
 
@@ -133,7 +135,11 @@ CREATE TABLE `videos` (
 --
 
 INSERT INTO `videos` (`id`, `Episode_Name`, `Ep_Video`, `A_Name`, `ext`, `Created_At`, `Updated_At`) VALUES
-(8, 'ep1', 'ep1.mp4', 'One Piece', 'mp4', '2023-05-16 12:57:26', '2023-05-16 12:57:26');
+(26, 'ep1', 'ep1.mp4', 'One Piece', 'mp4', '2023-06-05 10:58:29', '2023-06-05 10:58:29'),
+(27, 'ep1', 'ep1.mp4', 'MASHLE- MAGIC AND MUSCLES', 'mp4', '2023-06-05 10:58:40', '2023-06-05 10:58:40'),
+(28, 'ep1', 'ep1.mp4', 'Oshi No Ko', 'mp4', '2023-06-05 10:58:53', '2023-06-05 10:58:53'),
+(29, 'ep1', 'ep1.mp4', 'Brawl stars', 'mp4', '2023-06-05 10:59:06', '2023-06-05 10:59:06'),
+(30, 'ep1', 'ep1.mp4', 'The legendary hero is dead', 'mp4', '2023-06-05 10:59:20', '2023-06-05 10:59:20');
 
 --
 -- Indexes for dumped tables
@@ -182,7 +188,7 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `anime_info`
 --
 ALTER TABLE `anime_info`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -200,7 +206,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables

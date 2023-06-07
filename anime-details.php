@@ -31,7 +31,6 @@ $data = mysqli_fetch_assoc($anime_result);
 <section class="anime-details spad">
     <div class="container">
         <div class="anime__details__content">
-
             <div class="row">
                 <div class="col-lg-3">
                     <div class="anime__details__pic set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
@@ -125,13 +124,17 @@ $data = mysqli_fetch_assoc($anime_result);
                         <div class="comments">
                             // Fetch and display comments here
                             <?php
-                            $sql = "SELECT * FROM comments ORDER BY created_at DESC";
+                            $sql = "SELECT user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.Like
+                            FROM user
+                            INNER JOIN comments ON comments.U_Id=user.id";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
-                                $username = $_SESSION['username'];
+                                $username = $row['User_Name'];
                                 $comment = $row['Comment'];
-                                $pic = $_SESSION['Pic'];
+                                $pic = $row['Pic'];
+                                $created_at =  $row['Created_At'];
+                                $like = $row['Like'];
                             ?>
                                 <div class="blog__details__comment__item">
                                     <div class="blog__details__comment__item__pic">
@@ -139,12 +142,12 @@ $data = mysqli_fetch_assoc($anime_result);
                                     </div>
                                     <div class="blog__details__comment__item__text">
 
-                                        <span><?php echo date('Y-m-d', strtotime($row["Created_At"])) ?></span>
+                                        <span><?php echo date('Y-m-d', strtotime($created_at)) ?></span>
                                         <h5><?php echo $username ?></h5>
                                         <p><?php echo $comment ?></p>
                                         <span>
 
-                                            <?php echo $row['Like'] ?>
+                                            <?php echo $like ?>
                                             <a href="#">Like</a></span>
 
                                     </div>

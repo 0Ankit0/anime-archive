@@ -34,7 +34,6 @@ $data = mysqli_fetch_assoc($anime_result);
             <div class="row">
                 <div class="col-lg-3">
                     <div class="anime__details__pic set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
-                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                     </div>
                 </div>
@@ -193,7 +192,7 @@ $data = mysqli_fetch_assoc($anime_result);
                     ?><a href="anime-details.php?id=<?php echo $data['id']
                                                     ?>">
                             <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
-                                <div class="ep">18 / ?</div>
+
                                 <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 <h5><?php echo $data['Anime_Name'] ?>
                                 </h5>

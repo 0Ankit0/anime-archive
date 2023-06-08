@@ -57,8 +57,7 @@ require('connection/config.php');
                                                                 ?>">
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
-                                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                            <div class="view"><i class="fa fa-eye"></i> <?php echo $data['Views'] ?></div>
                                         </div>
                                         <div class="product__item__text">
                                             <ul>

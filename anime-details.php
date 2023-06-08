@@ -187,13 +187,15 @@ $data = mysqli_fetch_assoc($anime_result);
                     while ($count < 3) {
                         $data = mysqli_fetch_array($anime_result);
                         $count += 1;
-                    ?>
-                        <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="anime-details.php?id=<?php echo $data['id']
-                                                                ?>"><?php echo $data['Anime_Name'] ?></a></h5>
-                        </div>
+                    ?><a href="anime-details.php?id=<?php echo $data['id']
+                                                    ?>">
+                            <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
+                                <div class="ep">18 / ?</div>
+                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                <h5><?php echo $data['Anime_Name'] ?>
+                                </h5>
+                            </div>
+                        </a>
                     <?php
                     }
                     ?>

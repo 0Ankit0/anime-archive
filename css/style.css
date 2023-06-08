@@ -805,7 +805,7 @@ ol {
   padding: 0 30px 0 20px;
 }
 
-.product__sidebar__view__item h5 a {
+.product__sidebar__view__item h5  {
   color: #ffffff;
   font-weight: 700;
   line-height: 26px;
@@ -848,7 +848,7 @@ ol {
   margin-bottom: 10px;
 }
 
-.product__sidebar__comment__item__text h5 a {
+.product__sidebar__comment__item__text h5  {
   color: #ffffff;
   font-weight: 700;
   line-height: 26px;

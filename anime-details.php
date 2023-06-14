@@ -42,16 +42,60 @@ $data = mysqli_fetch_assoc($anime_result);
                         <div class="anime__details__title">
                             <h3><?php echo $data['Anime_Name'] ?></h3>
                         </div>
-                        <div class="anime__details__rating">
-                            <div class="rating">
-                                <a href="#" class="star" data-value="1"><i class="fa fa-star"></i></a>
-                                <a href="#" class="star" data-value="2"><i class="fa fa-star"></i></a>
-                                <a href="#" class="star" data-value="3"><i class="fa fa-star"></i></a>
-                                <a href="#" class="star" data-value="4"><i class="fa fa-star"></i></a>
-                                <a href="#" class="star" data-value="5"><i class="fa fa-star-half-o"></i></a>
-                            </div>
-                            <span id="votes">1.029 Votes</span>
+                        <!-- Rating system starts -->
+                        <?php
+                        $conn = new mysqli($serverName, $userName, $password, $dbname);
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+
+                        // Handle form submission
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                            $rating = $_POST['rating'];
+
+                            // Insert the new rating into the database
+                            $sql = "INSERT INTO ratings (rating) VALUES ('$rating')";
+                            if ($conn->query($sql) === TRUE) {
+                                $message = "Rating submitted successfully!";
+                                // Redirect to the same page to avoid form resubmission
+                                header("Location: " . $_SERVER['PHP_SELF']);
+                                exit;
+                            } else {
+                                $message = "Error: " . $sql . "<br>" . $conn->error;
+                            }
+                        }
+
+                        // Retrieve the average rating from the database
+                        $sql = "SELECT AVG(rating) AS average_rating FROM ratings";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                        $average_rating = $row['average_rating'];
+                        ?>
+                        <div class="container">
+
+                            <form method="POST" action="">
+                                <div class="rating">
+                                    <input type="radio" name="rating" value="5" id="5" <?php if ($average_rating >= 5) echo 'checked' ?>>
+                                    <label for="5"></label>
+                                    <input type="radio" name="rating" value="4" id="4" <?php if ($average_rating >= 4) echo 'checked' ?>>
+                                    <label for="4"></label>
+                                    <input type="radio" name="rating" value="3" id="3" <?php if ($average_rating >= 3) echo 'checked' ?>>
+                                    <label for="3"></label>
+                                    <input type="radio" name="rating" value="2" id="2" <?php if ($average_rating >= 2) echo 'checked' ?>>
+                                    <label for="2"></label>
+                                    <input type="radio" name="rating" value="1" id="1" <?php if ($average_rating >= 1) echo 'checked' ?>>
+                                    <label for="1"></label>
+                                </div>
+                                <div class="average-rating" style="color: white;"><?php echo number_format($average_rating, 1); ?></div>
+                                <button type="submit" onclick="handleClick(event)">Rate!</button>
+                                <?php if (isset($message)) { ?>
+                                    <div class="message"><?php echo $message; ?></div>
+                                <?php } ?>
+                            </form>
                         </div>
+
+
+                        <!-- Rating system ends -->
 
                         <p><?php echo $data["Anime_Description"] ?></p>
                         <div class="anime__details__widget">
@@ -121,7 +165,7 @@ $data = mysqli_fetch_assoc($anime_result);
                             <h5>Reviews</h5>
                         </div>
                         <div class="comments">
-                            // Fetch and display comments here
+
                             <?php
                             $sql = "SELECT user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.Like
                             FROM user
@@ -146,18 +190,70 @@ $data = mysqli_fetch_assoc($anime_result);
                                         <p><?php echo $comment ?></p>
                                         <span>
 
-                                            <?php echo $like ?>
-                                            <a href="#">Like</a></span>
-
+                                            <span id="likeCount"><?php echo $like ?></span>
+                                            <a href="#" onclick="toggleLike(event)">Like</a>
+                                        </span>
                                     </div>
                                 </div>
+                                <script>
+                                    function setCookie(name, value, days) {
+                                        var expires = "";
+                                        if (days) {
+                                            var date = new Date();
+                                            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                                            expires = "; expires=" + date.toUTCString();
+                                        }
+                                        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+                                    }
 
+                                    function getCookie(name) {
+                                        var nameEQ = name + "=";
+                                        var ca = document.cookie.split(';');
+                                        for (var i = 0; i < ca.length; i++) {
+                                            var c = ca[i];
+                                            while (c.charAt(0) === ' ') {
+                                                c = c.substring(1, c.length);
+                                            }
+                                            if (c.indexOf(nameEQ) === 0) {
+                                                return c.substring(nameEQ.length, c.length);
+                                            }
+                                        }
+                                        return null;
+                                    }
+
+                                    function toggleLike(event) {
+
+                                        event.preventDefault();
+                                        var likeCountElement = document.getElementById('likeCount');
+                                        var currentLikes = parseInt(likeCountElement.textContent);
+                                        var isLiked = getCookie('isLiked') === 'true';
+
+                                        if (isLiked) {
+                                            currentLikes -= 1;
+                                            setCookie('isLiked', 'false', 365); // Set the cookie to expire in 1 year
+                                        } else {
+                                            currentLikes += 1;
+                                            setCookie('isLiked', 'true', 365); // Set the cookie to expire in 1 year
+                                        }
+
+                                        likeCountElement.textContent = currentLikes;
+                                    }
+
+                                    // Retrieve and set the initial like status on page load
+                                    window.addEventListener('DOMContentLoaded', function() {
+                                        var isLiked = getCookie('isLiked') === 'true';
+                                        var likeCountElement = document.getElementById('likeCount');
+
+                                        if (isLiked) {
+                                            likeCountElement.textContent = parseInt(likeCountElement.textContent) + 1;
+                                        }
+                                    });
+                                </script>
                         </div>
 
 
                     </div>
 
-                    // Only logged-in users can see the comment form
 
                     <div class="anime__details__form">
                         <div class="section-title">

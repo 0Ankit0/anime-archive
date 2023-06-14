@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2023 at 03:28 AM
+-- Generation Time: Jun 15, 2023 at 01:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,11 +46,11 @@ CREATE TABLE `anime_info` (
 --
 
 INSERT INTO `anime_info` (`id`, `Anime_Name`, `No_Of_Episodes`, `Anime_Img`, `Anime_Description`, `Studios`, `Genre`, `Rating`, `Views`, `Created_At`, `Updated_At`) VALUES
-(1, 'One Piece', 0, 'one_piece.jpg', 'The Pirate King, Gol D. Roger, struck fear into the hearts of all who sailed the Grand Line with his unmatched strength and notorious reputation. However, his downfall at the hands of the World Government instigated a momentous shift in the world. His final words divulged...', 'Toei Animation', 'action', 5, 31, '2023-05-06 18:15:00', '2023-06-07 01:27:17'),
-(2, 'MASHLE- MAGIC AND MUSCLES', 0, 'Screenshot_20211201-173054.png', 'In a world where magic reigns supreme, Mash Burnedead suffers from the disadvantage of being young and without power. Perceived as a danger to the purity of the gene pool, he is forced to hide in the forest and dedicate himself to daily physical training. His goal: to develop...', 'A-1 Pictures', 'romance', 4, 32, '2023-05-06 18:15:00', '2023-06-05 10:20:06'),
-(3, 'Oshi No Ko', 0, 'Screenshot_20211223-200824.png', 'Ai Hoshino, a youthful and beautiful idol, is highly revered by her adoring fans as the epitome of innocence and purity. However, her pristine image is merely a facade.\r\nGorou Amemiya, a country-side gynecologist and passionate devotee of Ai, is astounded ...', 'Doga Kobo', 'adventure', 4, 200, '2023-05-06 18:15:00', '2023-05-25 11:45:19'),
-(4, 'Brawl stars', 0, 'Screenshot_20211024-183436.png', 'this is brawl stars', 'Ankit', 'action', 0, 0, '2023-05-25 11:04:56', '2023-05-25 11:04:56'),
-(5, 'The legendary hero is dead', 0, 'the-hero-is-dead.jpg', 'Amidst a realm of enchantment and fearsome creatures, the valiant Sion sets forth to rescue humanity from the clutches of demons. However, his mission takes an unexpected turn when he tumbles into a hole cunningly crafted by a deceitful local named Touka, and meets his ...', 'lidenfilms', 'action,adventure,fantasy,romance,comedy,', 0, 0, '2023-05-26 00:38:42', '2023-05-26 00:51:30');
+(1, 'One Piece', 0, 'one_piece.jpg', 'The Pirate King, Gol D. Roger, struck fear into the hearts of all who sailed the Grand Line with his unmatched strength and notorious reputation. However, his downfall at the hands of the World Government instigated a momentous shift in the world. His final words divulged...', 'Toei Animation', 'action', 4, 31, '2023-05-06 18:15:00', '2023-06-14 07:47:24'),
+(2, 'MASHLE- MAGIC AND MUSCLES', 0, 'Screenshot_20211201-173054.png', 'In a world where magic reigns supreme, Mash Burnedead suffers from the disadvantage of being young and without power. Perceived as a danger to the purity of the gene pool, he is forced to hide in the forest and dedicate himself to daily physical training. His goal: to develop...', 'A-1 Pictures', 'romance', 4, 32, '2023-05-06 18:15:00', '2023-06-14 07:47:24'),
+(3, 'Oshi No Ko', 0, 'Screenshot_20211223-200824.png', 'Ai Hoshino, a youthful and beautiful idol, is highly revered by her adoring fans as the epitome of innocence and purity. However, her pristine image is merely a facade.\r\nGorou Amemiya, a country-side gynecologist and passionate devotee of Ai, is astounded ...', 'Doga Kobo', 'adventure', 4, 200, '2023-05-06 18:15:00', '2023-06-14 07:47:24'),
+(4, 'Brawl stars', 0, 'Screenshot_20211024-183436.png', 'this is brawl stars', 'Ankit', 'action', 4, 0, '2023-05-25 11:04:56', '2023-06-14 07:47:24'),
+(5, 'The legendary hero is dead', 0, 'the-hero-is-dead.jpg', 'Amidst a realm of enchantment and fearsome creatures, the valiant Sion sets forth to rescue humanity from the clutches of demons. However, his mission takes an unexpected turn when he tumbles into a hole cunningly crafted by a deceitful local named Touka, and meets his ...', 'lidenfilms', 'action,adventure,fantasy,romance,comedy,', 4, 0, '2023-05-26 00:38:42', '2023-06-14 07:47:24');
 
 -- --------------------------------------------------------
 
@@ -87,6 +87,50 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`id`, `Comment`, `U_Id`, `Like`, `Created_At`, `Updated_At`) VALUES
 (2, 'hi', 11, 0, '2023-05-25 02:32:00', '2023-05-25 02:32:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ratings`
+--
+
+CREATE TABLE `ratings` (
+  `id` int(11) NOT NULL,
+  `rating` decimal(2,1) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`id`, `rating`, `created_at`) VALUES
+(1, 5.0, '2023-06-14 07:43:24'),
+(2, 5.0, '2023-06-14 07:43:31'),
+(3, 4.0, '2023-06-14 07:43:35'),
+(4, 4.0, '2023-06-14 07:44:47'),
+(5, 5.0, '2023-06-14 07:47:00'),
+(6, 3.0, '2023-06-14 07:47:23'),
+(7, 1.0, '2023-06-14 08:03:53'),
+(8, 5.0, '2023-06-14 08:03:58'),
+(9, 5.0, '2023-06-14 08:11:19'),
+(10, 5.0, '2023-06-14 08:11:23'),
+(11, 5.0, '2023-06-14 15:18:03'),
+(12, 5.0, '2023-06-14 15:19:19'),
+(13, 5.0, '2023-06-14 15:19:24'),
+(14, 5.0, '2023-06-14 15:23:28'),
+(15, 5.0, '2023-06-14 15:23:32'),
+(16, 1.0, '2023-06-14 15:23:40'),
+(17, 1.0, '2023-06-14 15:23:42'),
+(18, 1.0, '2023-06-14 15:23:44'),
+(19, 1.0, '2023-06-14 15:23:47'),
+(20, 1.0, '2023-06-14 15:23:53'),
+(21, 1.0, '2023-06-14 15:23:58'),
+(22, 1.0, '2023-06-14 15:24:01'),
+(23, 1.0, '2023-06-14 15:24:03'),
+(24, 1.0, '2023-06-14 15:24:07'),
+(25, 1.0, '2023-06-14 15:24:09'),
+(26, 1.0, '2023-06-14 15:24:11');
 
 -- --------------------------------------------------------
 
@@ -168,6 +212,12 @@ ALTER TABLE `comments`
   ADD KEY `U_Id` (`U_Id`);
 
 --
+-- Indexes for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -195,6 +245,12 @@ ALTER TABLE `anime_info`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `user`

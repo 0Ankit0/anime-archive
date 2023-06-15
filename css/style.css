@@ -1182,19 +1182,11 @@ ol {
   margin-bottom: 0;
   cursor: pointer;
   color: #ddd;
+  transition: color 0.3s ease;
 }
 
 .rating label:before {
   content: "\2605";
-}
-
-.container {
-  text-align: center;
-}
-
-.rating label {
-  transition: color 0.3s ease;
-  cursor: pointer;
 }
 
 .rating label:hover,
@@ -1204,6 +1196,10 @@ ol {
 
 .rating input:checked~label {
   color: #fdd835;
+}
+
+.container {
+  text-align: center;
 }
 
 .average-rating {

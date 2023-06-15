@@ -49,41 +49,44 @@ $data = mysqli_fetch_assoc($anime_result);
                             die("Connection failed: " . $conn->connect_error);
                         }
 
+                        // Retrieve the anime ID from the URL parameters
+                        $animeId = $_GET['id'];
+
                         // Handle form submission
                         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $rating = $_POST['rating'];
 
-                            // Insert the new rating into the database
-                            $sql = "INSERT INTO ratings (rating) VALUES ('$rating')";
+                            // Insert the new rating into the anime_info table
+                            $sql = "UPDATE anime_info SET Rating = '$rating' WHERE id = '$animeId'";
                             if ($conn->query($sql) === TRUE) {
                                 $message = "Rating submitted successfully!";
                                 // Redirect to the same page to avoid form resubmission
-                                header("Location: " . $_SERVER['PHP_SELF']);
+                                header("Location: " . $_SERVER['PHP_SELF'] . "?id=$animeId");
                                 exit;
                             } else {
                                 $message = "Error: " . $sql . "<br>" . $conn->error;
                             }
                         }
 
-                        // Retrieve the average rating from the database
-                        $sql = "SELECT AVG(rating) AS average_rating FROM ratings";
+                        // Retrieve the average rating for the specific anime
+                        $sql = "SELECT Rating FROM anime_info WHERE id = '$animeId'";
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
-                        $average_rating = $row['average_rating'];
+                        $average_rating = $row['Rating'];
                         ?>
-                        <div class="container">
 
-                            <form method="POST" action="">
+                        <div class="container">
+                            <form method="POST" action="anime-details.php?id=<?php echo $animeId; ?>">
                                 <div class="rating">
-                                    <input type="radio" name="rating" value="5" id="5" <?php if ($average_rating >= 5) echo 'checked' ?>>
+                                    <input type="radio" name="rating" value="5" id="5" <?php if ($average_rating >= 4.5 && $average_rating < 5) echo 'checked' ?>>
                                     <label for="5"></label>
-                                    <input type="radio" name="rating" value="4" id="4" <?php if ($average_rating >= 4) echo 'checked' ?>>
+                                    <input type="radio" name="rating" value="4" id="4" <?php if ($average_rating >= 3.5 && $average_rating < 4.5) echo 'checked' ?>>
                                     <label for="4"></label>
-                                    <input type="radio" name="rating" value="3" id="3" <?php if ($average_rating >= 3) echo 'checked' ?>>
+                                    <input type="radio" name="rating" value="3" id="3" <?php if ($average_rating >= 2.5 && $average_rating < 3.5) echo 'checked' ?>>
                                     <label for="3"></label>
-                                    <input type="radio" name="rating" value="2" id="2" <?php if ($average_rating >= 2) echo 'checked' ?>>
+                                    <input type="radio" name="rating" value="2" id="2" <?php if ($average_rating >= 1.5 && $average_rating < 2.5) echo 'checked' ?>>
                                     <label for="2"></label>
-                                    <input type="radio" name="rating" value="1" id="1" <?php if ($average_rating >= 1) echo 'checked' ?>>
+                                    <input type="radio" name="rating" value="1" id="1" <?php if ($average_rating >= 0.5 && $average_rating < 1.5) echo 'checked' ?>>
                                     <label for="1"></label>
                                 </div>
                                 <div class="average-rating" style="color: white;"><?php echo number_format($average_rating, 1); ?></div>
@@ -93,6 +96,7 @@ $data = mysqli_fetch_assoc($anime_result);
                                 <?php } ?>
                             </form>
                         </div>
+
 
 
                         <!-- Rating system ends -->
@@ -184,17 +188,16 @@ $data = mysqli_fetch_assoc($anime_result);
                                         <img src="Uploads/Pictures/<?php echo $_SESSION['Pic'] ?>" alt="" width="80" height="80" style="border-radius:50%" />
                                     </div>
                                     <div class="blog__details__comment__item__text">
-
                                         <span><?php echo date('Y-m-d', strtotime($created_at)) ?></span>
                                         <h5><?php echo $username ?></h5>
                                         <p><?php echo $comment ?></p>
                                         <span>
-
                                             <span id="likeCount"><?php echo $like ?></span>
-                                            <a href="#" onclick="toggleLike(event)">Like</a>
+                                            <a href="#" onclick="toggleLike(event, <?php echo $id ?>)">Like</a>
                                         </span>
                                     </div>
                                 </div>
+
                                 <script>
                                     function setCookie(name, value, days) {
                                         var expires = "";
@@ -221,19 +224,18 @@ $data = mysqli_fetch_assoc($anime_result);
                                         return null;
                                     }
 
-                                    function toggleLike(event) {
-
+                                    function toggleLike(event, id) {
                                         event.preventDefault();
                                         var likeCountElement = document.getElementById('likeCount');
                                         var currentLikes = parseInt(likeCountElement.textContent);
-                                        var isLiked = getCookie('isLiked') === 'true';
+                                        var isLiked = getCookie('isLiked_' + id) === 'true';
 
                                         if (isLiked) {
                                             currentLikes -= 1;
-                                            setCookie('isLiked', 'false', 365); // Set the cookie to expire in 1 year
+                                            setCookie('isLiked_' + id, 'false', 365); // Set the cookie to expire in 1 year
                                         } else {
                                             currentLikes += 1;
-                                            setCookie('isLiked', 'true', 365); // Set the cookie to expire in 1 year
+                                            setCookie('isLiked_' + id, 'true', 365); // Set the cookie to expire in 1 year
                                         }
 
                                         likeCountElement.textContent = currentLikes;
@@ -241,7 +243,7 @@ $data = mysqli_fetch_assoc($anime_result);
 
                                     // Retrieve and set the initial like status on page load
                                     window.addEventListener('DOMContentLoaded', function() {
-                                        var isLiked = getCookie('isLiked') === 'true';
+                                        var isLiked = getCookie('isLiked_<?php echo $id ?>') === 'true';
                                         var likeCountElement = document.getElementById('likeCount');
 
                                         if (isLiked) {

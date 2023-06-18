@@ -1178,6 +1178,55 @@ ol {
   border-radius: 2px;
 }
 
+.rating {
+  display: inline-block;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: center;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  display: inline-block;
+  padding: 5px;
+  font-size: 30px;
+  margin-bottom: 0;
+  cursor: pointer;
+  color: #ddd;
+  transition: color 0.3s ease;
+}
+
+.rating label:before {
+  content: "\2605";
+}
+
+.rating label:hover,
+.rating label:hover~label {
+  color: #fdd835;
+}
+
+.rating input:checked~label {
+  color: #fdd835;
+}
+
+.container {
+  text-align: center;
+}
+
+.average-rating {
+  font-size: 24px;
+  margin-top: 10px;
+  color: white;
+}
+
+.message {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 /*---------------------
   Anime Watching
 -----------------------*/

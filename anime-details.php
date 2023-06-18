@@ -45,20 +45,21 @@ $data = mysqli_fetch_assoc($anime_result);
                         <!-- Rating system starts -->
 
                         <div class="container">
-                            <form method="get" action="anime-details.php?id=<?php echo $animeId; ?>" style="display: flex;">
+                            <form method="get" action="Rating.php" style="display: flex;" enctype="multipart/form-data">
                                 <div class="rating">
-                                    <input type="radio" name="rating" value="5" id="5" <?php if ($average_rating >= 4.5 && $average_rating < 5) echo 'checked' ?>>
+                                    <input type="text" name="id" id="" value="<?php echo $data['id'] ?>" hidden>
+                                    <input type="radio" name="rating" value="5" id="5">
                                     <label for="5"></label>
-                                    <input type="radio" name="rating" value="4" id="4" <?php if ($average_rating >= 3.5 && $average_rating < 4.5) echo 'checked' ?>>
+                                    <input type="radio" name="rating" value="4" id="4">
                                     <label for="4"></label>
-                                    <input type="radio" name="rating" value="3" id="3" <?php if ($average_rating >= 2.5 && $average_rating < 3.5) echo 'checked' ?>>
+                                    <input type="radio" name="rating" value="3" id="3">
                                     <label for="3"></label>
-                                    <input type="radio" name="rating" value="2" id="2" <?php if ($average_rating >= 1.5 && $average_rating < 2.5) echo 'checked' ?>>
+                                    <input type="radio" name="rating" value="2" id="2">
                                     <label for="2"></label>
-                                    <input type="radio" name="rating" value="1" id="1" <?php if ($average_rating >= 0.5 && $average_rating < 1.5) echo 'checked' ?>>
+                                    <input type="radio" name="rating" value="1" id="1">
                                     <label for="1"></label>
                                 </div>
-                                <button type="submit" onclick="(e)=>{e.preventDefault();}" class="follow-btn" style="border: none; margin-left: 10px;">Rate!</button>
+                                <button type="submit" class="follow-btn" style="border: none; margin-left: 10px;" value="submit">Rate!</button>
                                 <?php if (isset($message)) { ?>
                                     <div class="message"><?php echo $message; ?></div>
                                 <?php } ?>

@@ -1028,7 +1028,7 @@ ol {
   color: #b7b7b7;
 }
 
-.anime__details__widget {
+.noList {
   margin-bottom: 15px;
 }
 
@@ -1042,10 +1042,11 @@ ol {
   color: #ffffff;
   line-height: 30px;
   position: relative;
-  padding-left: 18px;
+  text-align: left;
+  padding-left: 2rem;
 }
 
-.anime__details__widget ul li:before {
+.noList li:before {
   position: absolute;
   left: 0;
   top: 12px;
@@ -1053,15 +1054,16 @@ ol {
   width: 6px;
   background: #b7b7b7;
   content: "";
+ 
 }
 
-.anime__details__widget ul li span {
+.noList li span {
   color: #b7b7b7;
   width: 115px;
   display: inline-block;
 }
 
-.anime__details__btn .follow-btn {
+ .follow-btn {
   font-size: 13px;
   color: #ffffff;
   background: #e53637;

@@ -34,7 +34,7 @@ $data = mysqli_fetch_assoc($anime_result);
             <div class="row">
                 <div class="col-lg-3">
                     <div class="anime__details__pic set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                        <div class="view"><i class="fa fa-eye"></i> <?php echo $data["Views"] ?></div>
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -43,40 +43,9 @@ $data = mysqli_fetch_assoc($anime_result);
                             <h3><?php echo $data['Anime_Name'] ?></h3>
                         </div>
                         <!-- Rating system starts -->
-                        <?php
-                        $conn = new mysqli($serverName, $userName, $password, $dbname);
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
-
-                        // Retrieve the anime ID from the URL parameters
-                        $animeId = $_GET['id'];
-
-                        // Handle form submission
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                            $rating = $_POST['rating'];
-
-                            // Insert the new rating into the anime_info table
-                            $sql = "UPDATE anime_info SET Rating = '$rating' WHERE id = '$animeId'";
-                            if ($conn->query($sql) === TRUE) {
-                                $message = "Rating submitted successfully!";
-                                // Redirect to the same page to avoid form resubmission
-                                header("Location: " . $_SERVER['PHP_SELF'] . "?id=$animeId");
-                                exit;
-                            } else {
-                                $message = "Error: " . $sql . "<br>" . $conn->error;
-                            }
-                        }
-
-                        // Retrieve the average rating for the specific anime
-                        $sql = "SELECT Rating FROM anime_info WHERE id = '$animeId'";
-                        $result = $conn->query($sql);
-                        $row = $result->fetch_assoc();
-                        $average_rating = $row['Rating'];
-                        ?>
 
                         <div class="container">
-                            <form method="POST" action="anime-details.php?id=<?php echo $animeId; ?>">
+                            <form method="get" action="anime-details.php?id=<?php echo $animeId; ?>" style="display: flex;">
                                 <div class="rating">
                                     <input type="radio" name="rating" value="5" id="5" <?php if ($average_rating >= 4.5 && $average_rating < 5) echo 'checked' ?>>
                                     <label for="5"></label>
@@ -89,8 +58,7 @@ $data = mysqli_fetch_assoc($anime_result);
                                     <input type="radio" name="rating" value="1" id="1" <?php if ($average_rating >= 0.5 && $average_rating < 1.5) echo 'checked' ?>>
                                     <label for="1"></label>
                                 </div>
-                                <div class="average-rating" style="color: white;"><?php echo number_format($average_rating, 1); ?></div>
-                                <button type="submit" onclick="handleClick(event)">Rate!</button>
+                                <button type="submit" onclick="(e)=>{e.preventDefault();}" class="follow-btn" style="border: none; margin-left: 10px;">Rate!</button>
                                 <?php if (isset($message)) { ?>
                                     <div class="message"><?php echo $message; ?></div>
                                 <?php } ?>
@@ -105,14 +73,14 @@ $data = mysqli_fetch_assoc($anime_result);
                         <div class="anime__details__widget">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
-                                    <ul>
+                                    <ul class="noList">
                                         <li><span>Type:</span> TV Series</li>
                                         <li><span>Studios:</span><?php echo $data["Studios"] ?></li>
                                         <li><span>Date aired:</span><?php echo date('Y-m-d', strtotime($data["Created_At"])) ?></li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
-                                    <ul>
+                                    <ul class="noList">
                                         <li><span>Rating:</span> 8.5 / 161 times</li>
                                         <li><span>Genre:</span>
                                             <?php
@@ -291,7 +259,7 @@ $data = mysqli_fetch_assoc($anime_result);
                                                     ?>">
                             <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
 
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                <div class="view"><i class="fa fa-eye"></i> <?php echo $data["Views"] ?></div>
                                 <h5><?php echo $data['Anime_Name'] ?>
                                 </h5>
                             </div>

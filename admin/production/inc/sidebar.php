@@ -24,7 +24,8 @@
                               <h2>
                                   <?php
                                     if (isset($_SESSION['username'])) {
-                                        echo $_SESSION['username'];
+                                        $name = $_SESSION['username'];
+                                        echo $name;
                                     }
                                     ?>
                               </h2>
@@ -42,7 +43,9 @@
                                   <li>
                                       <a href="dashboard.php"><i class="fa fa-home"></i> Home </a>
                                   </li>
-                                  <?php switch ($_SESSION['role']) {
+                                  <?php
+                                    $role = $_SESSION['role'];
+                                    switch ($role) {
                                         case "admin":
                                     ?>
                                           <li>
@@ -56,7 +59,19 @@
 
                                               </ul>
                                           </li>
+                                          <li>
+                                              <a><i class="fa fa-folder-open-o"></i> Files
+                                                  <span class="fa fa-chevron-down"></span></a>
+                                              <ul class="nav child_menu">
+                                                  <li>
+                                                      <a href="addfile.php">Add files</a>
+                                                  </li>
+                                                  <li><a href="managefile.php">Manage files</a></li>
+
+                                              </ul>
+                                          </li>
                                       <?php
+                                            break;
                                         case "creator":
                                         ?>
                                           <li>
@@ -82,6 +97,10 @@
                                               </ul>
                                           </li>
                                   <?php
+                                            break;
+                                        default:
+                                            header('location:/anime-archive/');
+                                            break;
                                     }
                                     ?>
 

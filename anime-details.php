@@ -140,6 +140,7 @@ $data = mysqli_fetch_assoc($anime_result);
                         <div class="comments">
 
                             <?php
+
                             $sql = "SELECT user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.Like
                             FROM user
                             INNER JOIN comments ON comments.U_Id=user.id";
@@ -195,6 +196,7 @@ $data = mysqli_fetch_assoc($anime_result);
 
                                     function toggleLike(event, id) {
                                         event.preventDefault();
+
                                         var likeCountElement = document.getElementById('likeCount');
                                         var currentLikes = parseInt(likeCountElement.textContent);
                                         var isLiked = getCookie('isLiked_' + id) === 'true';

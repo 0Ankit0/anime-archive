@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2023 at 01:02 AM
+-- Generation Time: Jun 18, 2023 at 07:00 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,9 +46,9 @@ CREATE TABLE `anime_info` (
 --
 
 INSERT INTO `anime_info` (`id`, `Anime_Name`, `No_Of_Episodes`, `Anime_Img`, `Anime_Description`, `Studios`, `Genre`, `Rating`, `Views`, `Created_At`, `Updated_At`) VALUES
-(1, 'One Piece', 0, 'one_piece.jpg', 'The Pirate King, Gol D. Roger, struck fear into the hearts of all who sailed the Grand Line with his unmatched strength and notorious reputation. However, his downfall at the hands of the World Government instigated a momentous shift in the world. His final words divulged...', 'Toei Animation', 'action', 4, 31, '2023-05-06 18:15:00', '2023-06-14 07:47:24'),
+(1, 'One Piece', 0, 'one_piece.jpg', 'The Pirate King, Gol D. Roger, struck fear into the hearts of all who sailed the Grand Line with his unmatched strength and notorious reputation. However, his downfall at the hands of the World Government instigated a momentous shift in the world. His final words divulged...', 'Toei Animation', 'action', 1, 31, '2023-05-06 18:15:00', '2023-06-18 15:21:09'),
 (2, 'MASHLE- MAGIC AND MUSCLES', 0, 'Screenshot_20211201-173054.png', 'In a world where magic reigns supreme, Mash Burnedead suffers from the disadvantage of being young and without power. Perceived as a danger to the purity of the gene pool, he is forced to hide in the forest and dedicate himself to daily physical training. His goal: to develop...', 'A-1 Pictures', 'romance', 4, 32, '2023-05-06 18:15:00', '2023-06-14 07:47:24'),
-(3, 'Oshi No Ko', 0, 'Screenshot_20211223-200824.png', 'Ai Hoshino, a youthful and beautiful idol, is highly revered by her adoring fans as the epitome of innocence and purity. However, her pristine image is merely a facade.\r\nGorou Amemiya, a country-side gynecologist and passionate devotee of Ai, is astounded ...', 'Doga Kobo', 'adventure', 4, 200, '2023-05-06 18:15:00', '2023-06-14 07:47:24'),
+(3, 'Oshi No Ko', 0, 'Screenshot_20211223-200824.png', 'Ai Hoshino, a youthful and beautiful idol, is highly revered by her adoring fans as the epitome of innocence and purity. However, her pristine image is merely a facade.\r\nGorou Amemiya, a country-side gynecologist and passionate devotee of Ai, is astounded ...', 'Doga Kobo', 'adventure', 3, 201, '2023-05-06 18:15:00', '2023-06-18 16:58:52'),
 (4, 'Brawl stars', 0, 'Screenshot_20211024-183436.png', 'this is brawl stars', 'Ankit', 'action', 4, 0, '2023-05-25 11:04:56', '2023-06-14 07:47:24'),
 (5, 'The legendary hero is dead', 0, 'the-hero-is-dead.jpg', 'Amidst a realm of enchantment and fearsome creatures, the valiant Sion sets forth to rescue humanity from the clutches of demons. However, his mission takes an unexpected turn when he tumbles into a hole cunningly crafted by a deceitful local named Touka, and meets his ...', 'lidenfilms', 'action,adventure,fantasy,romance,comedy,', 4, 0, '2023-05-26 00:38:42', '2023-06-14 07:47:24');
 
@@ -91,46 +91,26 @@ INSERT INTO `comments` (`id`, `Comment`, `U_Id`, `Like`, `Created_At`, `Updated_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ratings`
+-- Table structure for table `rating`
 --
 
-CREATE TABLE `ratings` (
-  `id` int(11) NOT NULL,
-  `rating` decimal(2,1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `rating` (
+  `anime_id` int(5) NOT NULL,
+  `rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `ratings`
+-- Dumping data for table `rating`
 --
 
-INSERT INTO `ratings` (`id`, `rating`, `created_at`) VALUES
-(1, 5.0, '2023-06-14 07:43:24'),
-(2, 5.0, '2023-06-14 07:43:31'),
-(3, 4.0, '2023-06-14 07:43:35'),
-(4, 4.0, '2023-06-14 07:44:47'),
-(5, 5.0, '2023-06-14 07:47:00'),
-(6, 3.0, '2023-06-14 07:47:23'),
-(7, 1.0, '2023-06-14 08:03:53'),
-(8, 5.0, '2023-06-14 08:03:58'),
-(9, 5.0, '2023-06-14 08:11:19'),
-(10, 5.0, '2023-06-14 08:11:23'),
-(11, 5.0, '2023-06-14 15:18:03'),
-(12, 5.0, '2023-06-14 15:19:19'),
-(13, 5.0, '2023-06-14 15:19:24'),
-(14, 5.0, '2023-06-14 15:23:28'),
-(15, 5.0, '2023-06-14 15:23:32'),
-(16, 1.0, '2023-06-14 15:23:40'),
-(17, 1.0, '2023-06-14 15:23:42'),
-(18, 1.0, '2023-06-14 15:23:44'),
-(19, 1.0, '2023-06-14 15:23:47'),
-(20, 1.0, '2023-06-14 15:23:53'),
-(21, 1.0, '2023-06-14 15:23:58'),
-(22, 1.0, '2023-06-14 15:24:01'),
-(23, 1.0, '2023-06-14 15:24:03'),
-(24, 1.0, '2023-06-14 15:24:07'),
-(25, 1.0, '2023-06-14 15:24:09'),
-(26, 1.0, '2023-06-14 15:24:11');
+INSERT INTO `rating` (`anime_id`, `rating`) VALUES
+(3, 3),
+(3, 2),
+(1, 3),
+(1, 1),
+(3, 4),
+(3, 5),
+(3, 3);
 
 -- --------------------------------------------------------
 
@@ -156,7 +136,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `User_Name`, `Pic`, `Email`, `Password`, `Role`, `Created_At`, `Updated_At`) VALUES
 (10, 'admin', 'Screenshot_20211024-183436.png', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', '2023-05-24 12:01:35', '2023-05-24 12:01:35'),
 (11, 'user', 'pic.png', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', '2023-05-25 01:50:37', '2023-05-25 01:53:03'),
-(12, 'creator', 'Screenshot_20211223-200824.png', 'creator@gmail.com', 'ee2433259b0fe399b40e81d2c98a38b6', 'creator', '2023-05-25 02:45:26', '2023-05-25 02:45:26');
+(12, 'creator', 'Screenshot_20211223-200824.png', 'creator@gmail.com', 'ee2433259b0fe399b40e81d2c98a38b6', 'creator', '2023-05-25 02:45:26', '2023-05-25 02:45:26'),
+(13, 'User2', 'logo.png', 'user2@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', '2023-06-18 10:26:24', '2023-06-18 10:26:24');
 
 -- --------------------------------------------------------
 
@@ -212,12 +193,6 @@ ALTER TABLE `comments`
   ADD KEY `U_Id` (`U_Id`);
 
 --
--- Indexes for table `ratings`
---
-ALTER TABLE `ratings`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -244,19 +219,13 @@ ALTER TABLE `anime_info`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `ratings`
---
-ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `videos`

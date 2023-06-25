@@ -60,9 +60,13 @@ $data = mysqli_fetch_assoc($anime_result);
                                     <label for="1"></label>
                                 </div>
                                 <button type="submit" class="follow-btn" style="border: none; margin-left: 10px;" value="submit">Rate!</button>
-                                <?php if (isset($message)) { ?>
-                                    <div class="message"><?php echo $message; ?></div>
-                                <?php } ?>
+                                <?php
+                                $sql = "SELECT avg(rating) AS average FROM rating WHERE anime_id='$id'";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_assoc($result);
+                                ?>
+                                <span style="color:aliceblue;font-size:larger;padding-top:10px;"><?php echo "Avg:  " . round($row['average'], 1) ?></span>
+                                ?>
                             </form>
                         </div>
 
@@ -82,7 +86,6 @@ $data = mysqli_fetch_assoc($anime_result);
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <ul class="noList">
-                                        <li><span>Rating:</span> 8.5 / 161 times</li>
                                         <li><span>Genre:</span>
                                             <?php
                                             $values = explode(',', $data['Genre']);
@@ -137,9 +140,10 @@ $data = mysqli_fetch_assoc($anime_result);
                         <div class="section-title">
                             <h5>Reviews</h5>
                         </div>
-                        <div class="comments">
+                        <div class="comment">
 
                             <?php
+
                             $sql = "SELECT user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.Like
                             FROM user
                             INNER JOIN comments ON comments.U_Id=user.id";
@@ -165,85 +169,93 @@ $data = mysqli_fetch_assoc($anime_result);
                                             <a href="#" onclick="toggleLike(event, <?php echo $id ?>)">Like</a>
                                         </span>
                                     </div>
+                                    <script>
+                                        function setCookie(name, value, days) {
+                                            var expires = "";
+                                            if (days) {
+                                                var date = new Date();
+                                                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                                                expires = "; expires=" + date.toUTCString();
+                                            }
+                                            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+                                        }
+
+                                        function getCookie(name) {
+                                            var nameEQ = name + "=";
+                                            var ca = document.cookie.split(';');
+                                            for (var i = 0; i < ca.length; i++) {
+                                                var c = ca[i];
+                                                while (c.charAt(0) === ' ') {
+                                                    c = c.substring(1, c.length);
+                                                }
+                                                if (c.indexOf(nameEQ) === 0) {
+                                                    return c.substring(nameEQ.length, c.length);
+                                                }
+                                            }
+                                            return null;
+                                        }
+
+                                        function toggleLike(event, id) {
+                                            event.preventDefault();
+
+                                            var likeCountElement = document.getElementById('likeCount');
+                                            var currentLikes = parseInt(likeCountElement.textContent);
+                                            var isLiked = getCookie('isLiked_' + id) === 'true';
+
+                                            if (isLiked) {
+                                                currentLikes -= 1;
+                                                setCookie('isLiked_' + id, 'false', 365); // Set the cookie to expire in 1 year
+                                            } else {
+                                                currentLikes += 1;
+                                                setCookie('isLiked_' + id, 'true', 365); // Set the cookie to expire in 1 year
+                                            }
+
+                                            likeCountElement.textContent = currentLikes;
+                                        }
+
+                                        // Retrieve and set the initial like status on page load
+                                        window.addEventListener('DOMContentLoaded', function() {
+                                            var isLiked = getCookie('isLiked_<?php echo $id ?>') === 'true';
+                                            var likeCountElement = document.getElementById('likeCount');
+
+                                            if (isLiked) {
+                                                likeCountElement.textContent = parseInt(likeCountElement.textContent) + 1;
+                                            }
+                                        });
+                                    </script>
                                 </div>
 
-                                <script>
-                                    function setCookie(name, value, days) {
-                                        var expires = "";
-                                        if (days) {
-                                            var date = new Date();
-                                            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                                            expires = "; expires=" + date.toUTCString();
-                                        }
-                                        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-                                    }
-
-                                    function getCookie(name) {
-                                        var nameEQ = name + "=";
-                                        var ca = document.cookie.split(';');
-                                        for (var i = 0; i < ca.length; i++) {
-                                            var c = ca[i];
-                                            while (c.charAt(0) === ' ') {
-                                                c = c.substring(1, c.length);
-                                            }
-                                            if (c.indexOf(nameEQ) === 0) {
-                                                return c.substring(nameEQ.length, c.length);
-                                            }
-                                        }
-                                        return null;
-                                    }
-
-                                    function toggleLike(event, id) {
-                                        event.preventDefault();
-                                        var likeCountElement = document.getElementById('likeCount');
-                                        var currentLikes = parseInt(likeCountElement.textContent);
-                                        var isLiked = getCookie('isLiked_' + id) === 'true';
-
-                                        if (isLiked) {
-                                            currentLikes -= 1;
-                                            setCookie('isLiked_' + id, 'false', 365); // Set the cookie to expire in 1 year
-                                        } else {
-                                            currentLikes += 1;
-                                            setCookie('isLiked_' + id, 'true', 365); // Set the cookie to expire in 1 year
-                                        }
-
-                                        likeCountElement.textContent = currentLikes;
-                                    }
-
-                                    // Retrieve and set the initial like status on page load
-                                    window.addEventListener('DOMContentLoaded', function() {
-                                        var isLiked = getCookie('isLiked_<?php echo $id ?>') === 'true';
-                                        var likeCountElement = document.getElementById('likeCount');
-
-                                        if (isLiked) {
-                                            likeCountElement.textContent = parseInt(likeCountElement.textContent) + 1;
-                                        }
-                                    });
-                                </script>
-                        </div>
 
 
-                    </div>
 
 
-                    <div class="anime__details__form">
-                        <div class="section-title">
-                            <h5>Your Comment</h5>
-                        </div>
-                        <form action="process-comment.php" method="POST">
-                            <textarea name="comment" placeholder="Your Comment"></textarea>
-                            <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
-                        </form>
-                    </div>
-                <?php
+
+
+
+
+                            <?php
                             }
                         } else {
-                ?>
-                <h2 style="color:whitesmoke">Login to view comments</h2>
-            <?php
+                            ?>
+                            <h2 style="color:whitesmoke">Login to view comments</h2>
+                        <?php
                         }
-            ?>
+                        ?>
+                        </div>
+                        <div class="anime__details__form">
+                            <div class="section-title">
+                                <h5>Your Comment</h5>
+                            </div>
+                            <form action="process-comment.php" method="get">
+                                <textarea name="comment" placeholder="Your Comment"></textarea>
+                                <input type="number" name="id" id="" value="<?php echo $id ?>" hidden>
+                                <button type="submit" name="submit"><i class="fa fa-location-arrow"></i> Review</button>
+                            </form>
+                        </div>
+
+                    </div>
             </div>
+
             <div class="col-lg-4 col-md-4">
                 <div class="anime__details__sidebar">
                     <div class="section-title">

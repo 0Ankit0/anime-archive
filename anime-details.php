@@ -105,8 +105,47 @@ $data = mysqli_fetch_assoc($anime_result);
                                 </div>
                             </div>
                         </div>
+
                         <div class="anime__details__btn">
-                            <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
+                            <form method="POST" action='<?php if (isset($_SESSION['username'])) {
+                                                            echo "Bookmark.php";
+                                                        } else {
+                                                            echo "#";
+                                                        } ?>'>
+                                <input type="number" name="a_id" value="<?php echo $id; ?>" hidden>
+                                <?php
+                                if (isset($_SESSION['id'])) {
+
+                                ?>
+                                    <input type="number" name="u_id" value="<?php echo $_SESSION['id']; ?>" hidden>
+                                <?php
+                                }
+                                ?>
+
+                                <?php
+
+                                $id = $_GET['id'];
+                                $sql = "SELECT `User_Name`,`Email`,`Pic`,`Password`,bookmark.id FROM `anime_info` INNER JOIN `bookmark` INNER JOIN `user` on bookmark.A_id='$id' and bookmark.U_id=user.id ";
+                                $result = mysqli_query($conn, $sql);
+                                $isBookmarked = mysqli_fetch_assoc($result);
+
+                                if (!$isBookmarked) {
+                                ?>
+                                    <button type="submit" class="follow-btn" name="follow" value="submit" style="border: none;"><i class="fa fa-heart-o"></i>
+                                        Follow
+                                    </button>
+                                <?php
+                                } else {
+                                ?>
+                                    <a type="button" class="follow-btn" style="border: none;color: white;" href="DeleteBookmark.php?bid=<?php echo $isBookmarked['id'] ?>&aid=<?php echo $id ?>"><i class=" fa fa-heart-o"></i>
+                                        Followed
+                                    </a>
+                                    <span style="color: white;">Click to unfollow</span>
+                                <?php
+
+                                }
+                                ?>
+                            </form>
                         </div>
                     </div>
 
@@ -141,22 +180,22 @@ $data = mysqli_fetch_assoc($anime_result);
                             <h5>Reviews</h5>
                         </div>
                         <div class="comment">
+                            <div class="blog__details__comment__item">
+                                <?php
 
-                            <?php
-
-                            $sql = "SELECT user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.Like
+                                $sql = "SELECT user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.Like
                             FROM user
                             INNER JOIN comments ON comments.U_Id=user.id";
-                            $result = mysqli_query($conn, $sql);
+                                $result = mysqli_query($conn, $sql);
 
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $username = $row['User_Name'];
-                                $comment = $row['Comment'];
-                                $pic = $row['Pic'];
-                                $created_at =  $row['Created_At'];
-                                $like = $row['Like'];
-                            ?>
-                                <div class="blog__details__comment__item">
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $username = $row['User_Name'];
+                                    $comment = $row['Comment'];
+                                    $pic = $row['Pic'];
+                                    $created_at =  $row['Created_At'];
+                                    $like = $row['Like'];
+                                ?>
+
                                     <div class="blog__details__comment__item__pic">
                                         <img src="Uploads/Pictures/<?php echo $_SESSION['Pic'] ?>" alt="" width="80" height="80" style="border-radius:50%" />
                                     </div>
@@ -223,25 +262,20 @@ $data = mysqli_fetch_assoc($anime_result);
                                             }
                                         });
                                     </script>
-                                </div>
+                            </div>
 
 
 
-
-
-
-
-
-
-                            <?php
-                            }
-                        } else {
-                            ?>
-                            <h2 style="color:whitesmoke">Login to view comments</h2>
                         <?php
-                        }
+                                }
+                            } else {
                         ?>
-                        </div>
+
+                        <h2 style="color:whitesmoke">Login to view comments</h2>
+                    <?php
+                            }
+                            if (isset($_SESSION['username'])) {
+                    ?>
                         <div class="anime__details__form">
                             <div class="section-title">
                                 <h5>Your Comment</h5>
@@ -252,39 +286,46 @@ $data = mysqli_fetch_assoc($anime_result);
                                 <button type="submit" name="submit"><i class="fa fa-location-arrow"></i> Review</button>
                             </form>
                         </div>
-
-                    </div>
-            </div>
-
-            <div class="col-lg-4 col-md-4">
-                <div class="anime__details__sidebar">
-                    <div class="section-title">
-                        <h5>you might like...</h5>
-                    </div>
                     <?php
-                    $anime_query = "SELECT * FROM `anime_info`  ORDER BY `id` DESC";
-                    $anime_result = mysqli_query($conn, $anime_query);
-                    $count = 0;
-                    while ($count < 3) {
-                        $data = mysqli_fetch_array($anime_result);
-                        $count += 1;
-                    ?><a href="anime-details.php?id=<?php echo $data['id']
-                                                    ?>">
-                            <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
-
-                                <div class="view"><i class="fa fa-eye"></i> <?php echo $data["Views"] ?></div>
-                                <h5><?php echo $data['Anime_Name'] ?>
-                                </h5>
-                            </div>
-                        </a>
-                    <?php
-                    }
+                            }
                     ?>
 
-                </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-lg-4 col-md-4">
+                            <div class="anime__details__sidebar">
+                                <div class="section-title">
+                                    <h5>you might like...</h5>
+                                </div>
+                                <?php
+                                $anime_query = "SELECT * FROM `anime_info`  ORDER BY `id` DESC";
+                                $anime_result = mysqli_query($conn, $anime_query);
+                                $count = 0;
+                                while ($count < 3) {
+                                    $data = mysqli_fetch_array($anime_result);
+                                    $count += 1;
+                                ?><a href="anime-details.php?id=<?php echo $data['id']
+                                                            ?>">
+                                        <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
+
+                                            <div class="view"><i class="fa fa-eye"></i> <?php echo $data["Views"] ?></div>
+                                            <h5><?php echo $data['Anime_Name'] ?>
+                                            </h5>
+                                        </div>
+                                    </a>
+                                <?php
+                                }
+                                ?>
+
+                            </div>
+                        </div>
+
+                    </div>
             </div>
-        </div>
-    </div>
 </section>
 <!-- Anime Section End -->
 <?php

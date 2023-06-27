@@ -25,7 +25,7 @@ $data1 = mysqli_fetch_assoc($result1);
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
                     <a href="./index.php"><i class="fa fa-home"></i> Home</a>
-                    <a href="./categories.php">Categories</a>
+                    <a href="#">Categories</a>
                     <a href="#"><?php echo $data1['Genre'] ?></a>
                     <span><?php echo $data1['Anime_Name'] ?></span>
                 </div>
@@ -43,8 +43,9 @@ $data1 = mysqli_fetch_assoc($result1);
 
                 <div class="anime__video__player">
                     <video id="player" playsinline controls data-poster="Uploads/Pictures/<?php echo $data1["Anime_Img"] ?>">
-                        <source src='Uploads/videos/<?php echo $data0['Ep_Video']
-                                                    ?>' type='video/<?php echo $data0['ext'] ?>'>
+                        <source src='Uploads/videos/<?php echo $data1['Anime_Name']
+                                                    ?>/<?php echo $data0['Ep_Video']
+                                                        ?>' type='video/<?php echo $data0['ext'] ?>'>
                         <!-- Captions are optional -->
                         <track kind="captions" label="English captions" src="#" srclang="en" default />
                     </video>
@@ -62,7 +63,7 @@ $data1 = mysqli_fetch_assoc($result1);
                     while ($data = mysqli_fetch_assoc($result)) {;
 
                     ?>
-                       <a href="increaseviews.php?animename=<?php echo $name ?>&epname=<?php echo $data['Episode_Name'] ?>"><?php echo $data['Episode_Name'] ?></a>
+                        <a href="increaseviews.php?animename=<?php echo $name ?>&epname=<?php echo $data['Episode_Name'] ?>"><?php echo $data['Episode_Name'] ?></a>
                     <?php
                     }
                     ?>

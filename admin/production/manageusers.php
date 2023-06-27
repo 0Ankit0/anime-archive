@@ -173,7 +173,7 @@ if (!isset($_SESSION['username'])) {
                                                         // Get the ID value when the delete button is clicked
                                                         $('.delete-button').on('click', function() {
                                                             var id = $(this).data('id');
-                                                            $('#confirmDelete').attr('href', 'deletefile.php?id=' + id);
+                                                            $('#confirmDelete').attr('href', 'deleteuser.php?id=' + id);
                                                         });
                                                     </script>
                                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

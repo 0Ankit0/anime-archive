@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     if (isset($name)) {
        
         $mkdir = mkdir('../../Uploads/videos/'.$animeName);
-    $path = '../../Uploads/videos/'.$animeName.'/';
+        $path = '../../Uploads/videos/' . $animeName . '/';
         if (!empty($name)) {
             if (($fileextension !== "mp4") && ($fileextension !== "ogg") && ($fileextension !== "webm")) {
                 $success = 0;

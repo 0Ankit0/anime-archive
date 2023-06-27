@@ -54,33 +54,141 @@ require('inc/header.php');
         <table class="table">
 
             <tbody>
-                <tr>
-                    <td>
-                        <img src="https://placehold.it/100x100" alt="Website 1" class="img-fluid">
-                    </td>
-                    <td><a href="https://www.website1.com" target="_blank">https://www.website1.com</a></td>
-                    <td>
-                        <button class="btn btn-primary">Continue Reading</button>
-                        <button class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="https://placehold.it/100x100" alt="Website 2" class="img-fluid">
-                    </td>
-                    <td><a href="https://www.website2.com" target="_blank">https://www.website2.com</a></td>
-                    <td>
-                        <button class="btn btn-primary">Continue Reading</button>
-                        <button class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <!-- Add more bookmark rows here -->
+                <?php
+                require('connection/config.php');
+                $sql = "SELECT `Anime_Name`,`Anime_Img`,bookmark.A_id,bookmark.id FROM `anime_info` INNER JOIN `bookmark` INNER JOIN `user`  on  anime_info.id=bookmark.A_id and bookmark.U_id=user.id ";
+                $result = mysqli_query($conn, $sql);
+                while ($data = mysqli_fetch_assoc($result)) {
+
+                ?>
+                    <tr>
+                        <td>
+                            <img src="<?php echo "Uploads/Pictures/" . $data['Anime_Img'] ?>" alt="Website 1" width="180" height="100" style="object-fit: contain;">
+                        </td>
+                        <td style="padding-top: 50px;color: white;">
+                            <a href="anime-details.php?id=<?php echo $data['A_id'] ?>" style="color: white;">
+
+                                <?php echo $data['Anime_Name'] ?>
+                            </a>
+                        </td>
+                        <td style="padding-top: 50px;">
+                            <a type="button" href="DeleteBookmark.php?bid=<?php echo $data['id'] ?>" style="border: none; color: #e53637;">Delete</a>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+
             </tbody>
         </table>
 
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="padding-inline: 4rem;width: 100%;">
-        <img src="Uploads/Pictures/pic.jpg" alt="" height="300px" width="1240px" style="object-fit: cover;">
+        <?php
+        require('connection/config.php');
+        $sql = "SELECT `User_Name`,`Email`,`Pic`,`Password`,user.id FROM `anime_info` INNER JOIN `bookmark` INNER JOIN `user`  on  anime_info.id=bookmark.A_id and bookmark.U_id=user.id ";
+        $result = mysqli_query($conn, $sql);
+        $data = mysqli_fetch_assoc($result);
+
+        ?>
+
+        <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                <img src="Uploads/Pictures/<?php echo $data['Pic'] ?>" alt="Generic placeholder image" style="min-width: 150px; z-index: 1 ;min-height: 170px; object-fit: cover;">
+                <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="./admin/production/logout.php">Logout</a>
+            </div>
+            <div class="ms-3" style="margin-top: 130px;">
+                <h2><?php echo $data['User_Name'] ?></h2>
+            </div>
+        </div>
+        <div style="margin-top: 6rem;">
+            <form action="UpdateUser.php" method="POST" enctype="multipart/form-data">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-xl-9">
+
+
+                            <div class="card" style="border-radius: 15px;">
+                                <div class="card-body">
+
+                                    <div class="row align-items-center pt-4 pb-3">
+                                        <div class="col-md-3 ps-5">
+
+                                            <h6 class="mb-0">User name</h6>
+
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+                                            <input type="number" name="id" value="<?php echo $data['id'] ?>" hidden>
+
+                                            <input type="text" class="form-control form-control-lg" name="fullname" value="<?php echo $data['User_Name'] ?>" />
+
+                                        </div>
+                                    </div>
+
+                                    <hr class="mx-n3">
+
+                                    <div class="row align-items-center py-3">
+                                        <div class="col-md-3 ps-5">
+
+                                            <h6 class="mb-0">Email address</h6>
+
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+
+                                            <input type="email" class="form-control form-control-lg" value="<?php echo $data['Email'] ?>" name="email" />
+
+                                        </div>
+                                    </div>
+
+                                    <hr class="mx-n3">
+
+                                    <div class="row align-items-center py-3">
+                                        <div class="col-md-3 ps-5">
+
+                                            <h6 class="mb-0">Password</h6>
+
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+
+                                            <input type="password" class="form-control form-control-lg" name="password" value="<?php echo $data['Password'] ?>" />
+                                        </div>
+                                    </div>
+
+                                    <hr class="mx-n3">
+
+                                    <div class="row align-items-center py-3">
+                                        <div class="col-md-3 ps-5">
+
+                                            <h6 class="mb-0">Change Profile</h6>
+
+                                        </div>
+                                        <div class="col-md-9 pe-5">
+
+                                            <input class="form-control form-control-lg" id="formFileLg" type="file" value="<?php echo $data['Pic'] ?>" name="Picture" />
+                                            <div class="small text-muted mt-2">Upload your profile picture</div>
+
+                                        </div>
+                                    </div>
+
+                                    <hr class="mx-n3">
+
+                                    <div class="px-5 py-4">
+                                        <button type="submit" class="btn btn-primary btn-lg" name="update" value="update">Update</button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+        </div>
     </div>
 </div>
 

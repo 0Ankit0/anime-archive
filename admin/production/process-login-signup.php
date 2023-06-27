@@ -11,6 +11,7 @@ if (isset($_POST['Login'])) {
     if ($result) {
         session_start();
         $_SESSION['username'] = $row['User_Name'];
+        $_SESSION['id'] = $row['id'];
         $_SESSION['role'] = $row['Role'];
         $_SESSION['Pic'] = $row['Pic'];
 

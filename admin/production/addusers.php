@@ -109,7 +109,7 @@ if (!isset($_SESSION['username'])) {
                                     <label for="fullname">User Name * :</label>
                                     <input type="text" id="fullname" class="form-control" name="fullname" required />
 
-                                    <label for="file">Episode file * :</label>
+                                    <label for="file">User Picture* :</label>
                                     <input type="file" id="file" class="form-control" name="Picture" data-parsley-trigger="change" required />
 
                                     <label for="email">Email * :</label>

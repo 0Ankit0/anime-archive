@@ -173,9 +173,10 @@ $data = mysqli_fetch_assoc($anime_result);
         <div class="row">
             <div class="col-lg-8 col-md-8">
                 <?php
+
                 if (isset($_SESSION['username'])) {
                 ?>
-                    <div class="anime__details__review">
+                    <div class="anime__details__review" style="width: 400px; ">
                         <div class="section-title">
                             <h5>Reviews</h5>
                         </div>
@@ -183,12 +184,13 @@ $data = mysqli_fetch_assoc($anime_result);
                             <div class="blog__details__comment__item">
                                 <?php
 
-                                $sql = "SELECT user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.Like
+                                $sql = "SELECT comments.id,user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.Like
                             FROM user
                             INNER JOIN comments ON comments.U_Id=user.id";
                                 $result = mysqli_query($conn, $sql);
 
                                 while ($row = mysqli_fetch_assoc($result)) {
+                                    $id = $row['id'];
                                     $username = $row['User_Name'];
                                     $comment = $row['Comment'];
                                     $pic = $row['Pic'];
@@ -197,79 +199,74 @@ $data = mysqli_fetch_assoc($anime_result);
                                 ?>
 
                                     <div class="blog__details__comment__item__pic">
-                                        <img src="Uploads/Pictures/<?php echo $_SESSION['Pic'] ?>" alt="" width="80" height="80" style="border-radius:50%" />
+                                        <img src="Uploads/Pictures/<?php echo $pic; ?>" alt="" width="80" height="80" style="border-radius:50%" />
                                     </div>
                                     <div class="blog__details__comment__item__text">
                                         <span><?php echo date('Y-m-d', strtotime($created_at)) ?></span>
                                         <h5><?php echo $username ?></h5>
                                         <p><?php echo $comment ?></p>
                                         <span>
-                                            <span id="likeCount"><?php echo $like ?></span>
-                                            <a href="#" onclick="toggleLike(event, <?php echo $id ?>)">Like</a>
+                                            <span id="likeCount_<?php echo $id; ?>"><?php echo $like; ?></span>
+                                            <a href="#" class="like-link" data-comment-id="<?php echo $id; ?>">Like</a>
+
+
+                                            <a href='delete-comment.php?id=<?php echo $row['id']; ?>'>Delete</a>
+
                                         </span>
                                     </div>
-                                    <script>
-                                        function setCookie(name, value, days) {
-                                            var expires = "";
-                                            if (days) {
-                                                var date = new Date();
-                                                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                                                expires = "; expires=" + date.toUTCString();
-                                            }
-                                            document.cookie = name + "=" + (value || "") + expires + "; path=/";
-                                        }
 
-                                        function getCookie(name) {
-                                            var nameEQ = name + "=";
-                                            var ca = document.cookie.split(';');
-                                            for (var i = 0; i < ca.length; i++) {
-                                                var c = ca[i];
-                                                while (c.charAt(0) === ' ') {
-                                                    c = c.substring(1, c.length);
-                                                }
-                                                if (c.indexOf(nameEQ) === 0) {
-                                                    return c.substring(nameEQ.length, c.length);
-                                                }
-                                            }
-                                            return null;
-                                        }
+                            </div>
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script>
+                                $(document).ready(function() {
+                                    $(".like-link").on("click", function(e) {
+                                        e.preventDefault();
 
-                                        function toggleLike(event, id) {
-                                            event.preventDefault();
+                                        // Get the comment ID from the data-comment-id attribute
+                                        var commentId = $(this).data("comment-id");
 
-                                            var likeCountElement = document.getElementById('likeCount');
-                                            var currentLikes = parseInt(likeCountElement.textContent);
-                                            var isLiked = getCookie('isLiked_' + id) === 'true';
+                                        // Get the current like count element
+                                        var likeCountElement = $("#likeCount_" + commentId);
 
-                                            if (isLiked) {
-                                                currentLikes -= 1;
-                                                setCookie('isLiked_' + id, 'false', 365); // Set the cookie to expire in 1 year
-                                            } else {
-                                                currentLikes += 1;
-                                                setCookie('isLiked_' + id, 'true', 365); // Set the cookie to expire in 1 year
-                                            }
+                                        // Get the current like count value
+                                        var likeCount = parseInt(likeCountElement.text());
 
-                                            likeCountElement.textContent = currentLikes;
-                                        }
+                                        // Check if the user has already liked the comment
+                                        var hasLiked = $(this).hasClass("liked");
 
-                                        // Retrieve and set the initial like status on page load
-                                        window.addEventListener('DOMContentLoaded', function() {
-                                            var isLiked = getCookie('isLiked_<?php echo $id ?>') === 'true';
-                                            var likeCountElement = document.getElementById('likeCount');
+                                        // Calculate the new like count
+                                        var newLikeCount = hasLiked ? likeCount - 1 : likeCount + 1;
 
-                                            if (isLiked) {
-                                                likeCountElement.textContent = parseInt(likeCountElement.textContent) + 1;
+                                        // Send an AJAX request to update the like count
+                                        $.ajax({
+                                            url: "update-like.php",
+                                            method: "POST",
+                                            data: {
+                                                commentId: commentId,
+                                                newLikeCount: newLikeCount
+                                            },
+                                            success: function(response) {
+                                                // Update the like count element with the new value
+                                                likeCountElement.text(newLikeCount);
+
+                                                // Toggle the "liked" class to indicate the user's action
+                                                $(this).toggleClass("liked");
+                                            },
+                                            error: function() {
+                                                console.log("An error occurred while updating the like count.");
                                             }
                                         });
-                                    </script>
-                            </div>
-
+                                    });
+                                });
+                            </script>
 
 
                         <?php
                                 }
                             } else {
                         ?>
+
+
 
                         <h2 style="color:whitesmoke">Login to view comments</h2>
                     <?php
@@ -296,6 +293,7 @@ $data = mysqli_fetch_assoc($anime_result);
 
 
 
+
                         <div class="col-lg-4 col-md-4">
                             <div class="anime__details__sidebar">
                                 <div class="section-title">
@@ -309,7 +307,7 @@ $data = mysqli_fetch_assoc($anime_result);
                                     $data = mysqli_fetch_array($anime_result);
                                     $count += 1;
                                 ?><a href="anime-details.php?id=<?php echo $data['id']
-                                                            ?>">
+                                                                ?>">
                                         <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
 
                                             <div class="view"><i class="fa fa-eye"></i> <?php echo $data["Views"] ?></div>

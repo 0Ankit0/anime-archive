@@ -87,7 +87,7 @@ require('inc/header.php');
         <?php
         require('connection/config.php');
         $id = $_SESSION['id'];
-        $sql = "SELECT * FROM `user` WHERE `id`='$id' ";
+        $sql = "SELECT * FROM  `user`  WHERE `id`= '$id'";
         $result = mysqli_query($conn, $sql);
         $data = mysqli_fetch_assoc($result);
 

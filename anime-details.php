@@ -6,6 +6,7 @@ require('connection/config.php');
 
 <?php
 $id = $_GET['id'];
+$animeId = $id;
 $anime_query = "SELECT * FROM `anime_info` WHERE `id`='$id'";
 $anime_result = mysqli_query($conn, $anime_query);
 
@@ -176,7 +177,7 @@ $data = mysqli_fetch_assoc($anime_result);
 
                 if (isset($_SESSION['username'])) {
                 ?>
-                    <div class="anime__details__review" style="width: 400px; ">
+                    <div class="anime__details__review" style="width: 300px; ">
                         <div class="section-title">
                             <h5>Reviews</h5>
                         </div>
@@ -206,124 +207,127 @@ $data = mysqli_fetch_assoc($anime_result);
                                         <h5><?php echo $username ?></h5>
                                         <p><?php echo $comment ?></p>
                                         <span>
-                                            <span id="likeCount_<?php echo $id; ?>"><?php echo $like; ?></span>
-                                            <a href="#" class="like-link" data-comment-id="<?php echo $id; ?>">Like</a>
+                                            <!-- <span id="likeCount_<?php echo $id; ?>"><?php echo $like; ?></span> -->
+                                            <!-- <a href="#" class="like-link" data-comment-id="<?php echo $id; ?>">Like</a> -->
 
 
-                                            <a href='delete-comment.php?id=<?php echo $row['id']; ?>'>Delete</a>
+                                            <a href='delete-comment.php?cid=<?php echo $row['id']; ?>&aid=<?php echo $animeId ?>'>Delete</a>
 
                                         </span>
                                     </div>
 
-                            </div>
-                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                            <script>
-                                $(document).ready(function() {
-                                    $(".like-link").on("click", function(e) {
-                                        e.preventDefault();
 
-                                        // Get the comment ID from the data-comment-id attribute
-                                        var commentId = $(this).data("comment-id");
+                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $(".like-link").on("click", function(e) {
+                                                e.preventDefault();
 
-                                        // Get the current like count element
-                                        var likeCountElement = $("#likeCount_" + commentId);
+                                                // Get the comment ID from the data-comment-id attribute
+                                                var commentId = $(this).data("comment-id");
 
-                                        // Get the current like count value
-                                        var likeCount = parseInt(likeCountElement.text());
+                                                // Get the current like count element
+                                                var likeCountElement = $("#likeCount_" + commentId);
 
-                                        // Check if the user has already liked the comment
-                                        var hasLiked = $(this).hasClass("liked");
+                                                // Get the current like count value
+                                                var likeCount = parseInt(likeCountElement.text());
 
-                                        // Calculate the new like count
-                                        var newLikeCount = hasLiked ? likeCount - 1 : likeCount + 1;
+                                                // Check if the user has already liked the comment
+                                                var hasLiked = $(this).hasClass("liked");
 
-                                        // Send an AJAX request to update the like count
-                                        $.ajax({
-                                            url: "update-like.php",
-                                            method: "POST",
-                                            data: {
-                                                commentId: commentId,
-                                                newLikeCount: newLikeCount
-                                            },
-                                            success: function(response) {
-                                                // Update the like count element with the new value
-                                                likeCountElement.text(newLikeCount);
+                                                // Calculate the new like count
+                                                var newLikeCount = hasLiked ? likeCount - 1 : likeCount + 1;
 
-                                                // Toggle the "liked" class to indicate the user's action
-                                                $(this).toggleClass("liked");
-                                            },
-                                            error: function() {
-                                                console.log("An error occurred while updating the like count.");
-                                            }
+                                                // Send an AJAX request to update the like count
+                                                $.ajax({
+                                                    url: "update-like.php",
+                                                    method: "POST",
+                                                    data: {
+                                                        commentId: commentId,
+                                                        newLikeCount: newLikeCount
+                                                    },
+                                                    success: function(response) {
+                                                        // Update the like count element with the new value
+                                                        likeCountElement.text(newLikeCount);
+
+                                                        // Toggle the "liked" class to indicate the user's action
+                                                        $(this).toggleClass("liked");
+                                                    },
+                                                    error: function() {
+                                                        console.log("An error occurred while updating the like count.");
+                                                    }
+                                                });
+                                            });
                                         });
-                                    });
-                                });
-                            </script>
+                                    </script>
 
 
-                        <?php
+                                <?php
                                 }
                             } else {
-                        ?>
-
-
-
-                        <h2 style="color:whitesmoke">Login to view comments</h2>
-                    <?php
-                            }
-                            if (isset($_SESSION['username'])) {
-                    ?>
-                        <div class="anime__details__form">
-                            <div class="section-title">
-                                <h5>Your Comment</h5>
-                            </div>
-                            <form action="process-comment.php" method="get">
-                                <textarea name="comment" placeholder="Your Comment"></textarea>
-                                <input type="number" name="id" id="" value="<?php echo $id ?>" hidden>
-                                <button type="submit" name="submit"><i class="fa fa-location-arrow"></i> Review</button>
-                            </form>
-                        </div>
-                    <?php
-                            }
-                    ?>
-
-                        </div>
-
-
-
-
-
-
-                        <div class="col-lg-4 col-md-4">
-                            <div class="anime__details__sidebar">
-                                <div class="section-title">
-                                    <h5>you might like...</h5>
-                                </div>
-                                <?php
-                                $anime_query = "SELECT * FROM `anime_info`  ORDER BY `id` DESC";
-                                $anime_result = mysqli_query($conn, $anime_query);
-                                $count = 0;
-                                while ($count < 3) {
-                                    $data = mysqli_fetch_array($anime_result);
-                                    $count += 1;
-                                ?><a href="anime-details.php?id=<?php echo $data['id']
-                                                                ?>">
-                                        <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
-
-                                            <div class="view"><i class="fa fa-eye"></i> <?php echo $data["Views"] ?></div>
-                                            <h5><?php echo $data['Anime_Name'] ?>
-                                            </h5>
-                                        </div>
-                                    </a>
-                                <?php
-                                }
                                 ?>
 
+
+
+                                <h2 style="color:whitesmoke">Login to view comments</h2>
+                            <?php
+                            }
+                            if (isset($_SESSION['username'])) {
+                            ?>
+                                <div class="anime__details__form">
+                                    <div class="section-title">
+                                        <h5>Your Comment</h5>
+                                    </div>
+                                    <form action="process-comment.php" method="get">
+                                        <textarea name="comment" placeholder="Your Comment"></textarea>
+                                        <input type="number" name="id" id="" value="<?php echo $animeId ?>" hidden>
+                                        <button type="submit" name="submit"><i class="fa fa-location-arrow"></i> Review</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
                     </div>
+                <?php
+                            }
+                ?>
+
             </div>
+
+
+
+
+
+
+            <div class="col-lg-4 col-md-4">
+                <div class="anime__details__sidebar">
+                    <div class="section-title">
+                        <h5>you might like...</h5>
+                    </div>
+                    <?php
+                    $anime_query = "SELECT * FROM `anime_info`  ORDER BY `id` DESC";
+                    $anime_result = mysqli_query($conn, $anime_query);
+                    $count = 0;
+                    while ($count < 3) {
+                        $data = mysqli_fetch_array($anime_result);
+                        $count += 1;
+                    ?><a href="anime-details.php?id=<?php echo $data['id']
+                                                            ?>">
+                            <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
+
+                                <div class="view"><i class="fa fa-eye"></i> <?php echo $data["Views"] ?></div>
+                                <h5><?php echo $data['Anime_Name'] ?>
+                                </h5>
+                            </div>
+                        </a>
+                    <?php
+                    }
+                    ?>
+
+                </div>
+            </div>
+
+
+
 </section>
 <!-- Anime Section End -->
 <?php

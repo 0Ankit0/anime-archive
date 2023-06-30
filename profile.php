@@ -86,7 +86,8 @@ require('inc/header.php');
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="padding-inline: 4rem;width: 100%;">
         <?php
         require('connection/config.php');
-        $sql = "SELECT `User_Name`,`Email`,`Pic`,`Password`,user.id FROM `anime_info` INNER JOIN `bookmark` INNER JOIN `user`  on  anime_info.id=bookmark.A_id and bookmark.U_id=user.id ";
+        $id = $_SESSION['id'];
+        $sql = "SELECT * FROM `user` WHERE `id`='$id' ";
         $result = mysqli_query($conn, $sql);
         $data = mysqli_fetch_assoc($result);
 

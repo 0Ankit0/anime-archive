@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2023 at 10:23 AM
+-- Generation Time: Jul 02, 2023 at 12:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,7 +47,7 @@ CREATE TABLE `anime_info` (
 
 INSERT INTO `anime_info` (`id`, `Anime_Name`, `No_Of_Episodes`, `Anime_Img`, `Anime_Description`, `Studios`, `Genre`, `Rating`, `Views`, `Created_At`, `Updated_At`) VALUES
 (1, 'One Piece', 0, 'one_piece.jpg', 'The Pirate King, Gol D. Roger, struck fear into the hearts of all who sailed the Grand Line with his unmatched strength and notorious reputation. However, his downfall at the hands of the World Government instigated a momentous shift in the world. His final words divulged...', 'Toei Animation', 'action', 1, 31, '2023-05-06 18:15:00', '2023-06-18 15:21:09'),
-(2, 'MASHLE- MAGIC AND MUSCLES', 0, 'Screenshot_20211201-173054.png', 'In a world where magic reigns supreme, Mash Burnedead suffers from the disadvantage of being young and without power. Perceived as a danger to the purity of the gene pool, he is forced to hide in the forest and dedicate himself to daily physical training. His goal: to develop...', 'A-1 Pictures', 'romance', 4, 32, '2023-05-06 18:15:00', '2023-06-14 07:47:24'),
+(2, 'MASHLE- MAGIC AND MUSCLES', 0, 'Screenshot_20211201-173054.png', 'In a world where magic reigns supreme, Mash Burnedead suffers from the disadvantage of being young and without power. Perceived as a danger to the purity of the gene pool, he is forced to hide in the forest and dedicate himself to daily physical training. His goal: to develop...', 'A-1 Pictures', 'romance', 4, 32, '2023-05-06 18:15:00', '2023-07-02 08:53:17'),
 (3, 'Oshi No Ko', 0, 'Screenshot_20211223-200824.png', 'Ai Hoshino, a youthful and beautiful idol, is highly revered by her adoring fans as the epitome of innocence and purity. However, her pristine image is merely a facade.\r\nGorou Amemiya, a country-side gynecologist and passionate devotee of Ai, is astounded ...', 'Doga Kobo', 'adventure', 3, 201, '2023-05-06 18:15:00', '2023-06-18 16:58:52'),
 (4, 'Brawl stars', 0, 'Screenshot_20211024-183436.png', 'this is brawl stars', 'Ankit', 'action', 4, 0, '2023-05-25 11:04:56', '2023-06-14 07:47:24'),
 (5, 'The legendary hero is dead', 0, 'the-hero-is-dead.jpg', 'Amidst a realm of enchantment and fearsome creatures, the valiant Sion sets forth to rescue humanity from the clutches of demons. However, his mission takes an unexpected turn when he tumbles into a hole cunningly crafted by a deceitful local named Touka, and meets his ...', 'lidenfilms', 'action,adventure,fantasy,romance,comedy,', 3, 0, '2023-05-26 00:38:42', '2023-06-30 01:01:14');
@@ -76,6 +76,7 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `Comment` varchar(255) NOT NULL,
   `U_Id` int(11) NOT NULL,
+  `A_id` int(11) NOT NULL,
   `Like` int(5) NOT NULL,
   `Created_At` timestamp NOT NULL DEFAULT current_timestamp(),
   `Updated_At` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -85,12 +86,9 @@ CREATE TABLE `comments` (
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`id`, `Comment`, `U_Id`, `Like`, `Created_At`, `Updated_At`) VALUES
-(4, 'yohohoho', 13, 0, '2023-06-30 00:45:08', '2023-06-30 00:45:08'),
-(6, 'hiiiiiiiiiii', 11, 0, '2023-06-30 01:01:44', '2023-06-30 01:01:44'),
-(12, 'yiiiiiiiiiiiiiiiiiiiiiiiiiiiii', 13, 0, '2023-06-30 01:25:45', '2023-06-30 01:25:45'),
-(13, 'bbbbbb', 13, 0, '2023-06-30 01:27:45', '2023-06-30 01:27:45'),
-(14, 'uuu', 13, 0, '2023-06-30 01:45:43', '2023-06-30 01:45:43');
+INSERT INTO `comments` (`id`, `Comment`, `U_Id`, `A_id`, `Like`, `Created_At`, `Updated_At`) VALUES
+(15, 'yoooo', 11, 3, 0, '2023-07-02 09:36:49', '2023-07-02 09:36:49'),
+(17, 'hi comment', 11, 1, 0, '2023-07-02 09:45:44', '2023-07-02 09:45:44');
 
 -- --------------------------------------------------------
 
@@ -115,7 +113,17 @@ INSERT INTO `rating` (`anime_id`, `rating`) VALUES
 (3, 4),
 (3, 5),
 (3, 3),
-(5, 3);
+(5, 3),
+(2, 3),
+(2, 1),
+(2, 2),
+(2, 5),
+(2, 4),
+(2, 5),
+(2, 0),
+(2, 2),
+(2, 0),
+(2, 4);
 
 -- --------------------------------------------------------
 
@@ -224,7 +232,7 @@ ALTER TABLE `anime_info`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user`

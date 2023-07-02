@@ -175,6 +175,13 @@ $data = mysqli_fetch_assoc($anime_result);
             <div class="col-lg-8 col-md-8">
                 <?php
 
+                if (isset($animeId)) {
+                    // Retrieve the anime details based on the provided ID
+                    $animeSql = "SELECT * FROM anime_info WHERE id = $animeId";
+                    $animeResult = mysqli_query($conn, $animeSql);
+                    $animeRow = mysqli_fetch_assoc($animeResult);
+                }
+
                 if (isset($_SESSION['username'])) {
                 ?>
                     <div class="anime__details__review" style="width: 300px; ">
@@ -187,7 +194,8 @@ $data = mysqli_fetch_assoc($anime_result);
 
                                 $sql = "SELECT comments.id,user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.Like
                             FROM user
-                            INNER JOIN comments ON comments.U_Id=user.id";
+                            INNER JOIN comments ON comments.U_Id=user.id 
+                            WHERE comments.A_Id = $animeId";
                                 $result = mysqli_query($conn, $sql);
 
                                 while ($row = mysqli_fetch_assoc($result)) {
@@ -311,7 +319,7 @@ $data = mysqli_fetch_assoc($anime_result);
                         $data = mysqli_fetch_array($anime_result);
                         $count += 1;
                     ?><a href="anime-details.php?id=<?php echo $data['id']
-                                                            ?>">
+                                                    ?>">
                             <div class="product__sidebar__view__item set-bg" data-setbg="Uploads/Pictures/<?php echo $data["Anime_Img"] ?>">
 
                                 <div class="view"><i class="fa fa-eye"></i> <?php echo $data["Views"] ?></div>

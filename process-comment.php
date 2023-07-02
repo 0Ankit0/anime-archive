@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_GET['submit'])) {
     $comment = $_GET['comment'];
 
     // Insert the comment into the database
-    $sql = "INSERT INTO comments (U_Id, comment) VALUES ('$u_id', '$comment')";
+    $sql = "INSERT INTO comments (U_Id, A_Id, Comment) VALUES ('$u_id', '$id', '$comment')";
     $result = mysqli_query($conn, $sql);
     if (!$result) {
         echo "Error: " . mysqli_error($conn);

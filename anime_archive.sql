@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2023 at 07:00 PM
+-- Generation Time: Jul 02, 2023 at 10:23 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -50,7 +50,7 @@ INSERT INTO `anime_info` (`id`, `Anime_Name`, `No_Of_Episodes`, `Anime_Img`, `An
 (2, 'MASHLE- MAGIC AND MUSCLES', 0, 'Screenshot_20211201-173054.png', 'In a world where magic reigns supreme, Mash Burnedead suffers from the disadvantage of being young and without power. Perceived as a danger to the purity of the gene pool, he is forced to hide in the forest and dedicate himself to daily physical training. His goal: to develop...', 'A-1 Pictures', 'romance', 4, 32, '2023-05-06 18:15:00', '2023-06-14 07:47:24'),
 (3, 'Oshi No Ko', 0, 'Screenshot_20211223-200824.png', 'Ai Hoshino, a youthful and beautiful idol, is highly revered by her adoring fans as the epitome of innocence and purity. However, her pristine image is merely a facade.\r\nGorou Amemiya, a country-side gynecologist and passionate devotee of Ai, is astounded ...', 'Doga Kobo', 'adventure', 3, 201, '2023-05-06 18:15:00', '2023-06-18 16:58:52'),
 (4, 'Brawl stars', 0, 'Screenshot_20211024-183436.png', 'this is brawl stars', 'Ankit', 'action', 4, 0, '2023-05-25 11:04:56', '2023-06-14 07:47:24'),
-(5, 'The legendary hero is dead', 0, 'the-hero-is-dead.jpg', 'Amidst a realm of enchantment and fearsome creatures, the valiant Sion sets forth to rescue humanity from the clutches of demons. However, his mission takes an unexpected turn when he tumbles into a hole cunningly crafted by a deceitful local named Touka, and meets his ...', 'lidenfilms', 'action,adventure,fantasy,romance,comedy,', 4, 0, '2023-05-26 00:38:42', '2023-06-14 07:47:24');
+(5, 'The legendary hero is dead', 0, 'the-hero-is-dead.jpg', 'Amidst a realm of enchantment and fearsome creatures, the valiant Sion sets forth to rescue humanity from the clutches of demons. However, his mission takes an unexpected turn when he tumbles into a hole cunningly crafted by a deceitful local named Touka, and meets his ...', 'lidenfilms', 'action,adventure,fantasy,romance,comedy,', 3, 0, '2023-05-26 00:38:42', '2023-06-30 01:01:14');
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,11 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `Comment`, `U_Id`, `Like`, `Created_At`, `Updated_At`) VALUES
-(2, 'hi', 11, 0, '2023-05-25 02:32:00', '2023-05-25 02:32:00');
+(4, 'yohohoho', 13, 0, '2023-06-30 00:45:08', '2023-06-30 00:45:08'),
+(6, 'hiiiiiiiiiii', 11, 0, '2023-06-30 01:01:44', '2023-06-30 01:01:44'),
+(12, 'yiiiiiiiiiiiiiiiiiiiiiiiiiiiii', 13, 0, '2023-06-30 01:25:45', '2023-06-30 01:25:45'),
+(13, 'bbbbbb', 13, 0, '2023-06-30 01:27:45', '2023-06-30 01:27:45'),
+(14, 'uuu', 13, 0, '2023-06-30 01:45:43', '2023-06-30 01:45:43');
 
 -- --------------------------------------------------------
 
@@ -110,7 +114,8 @@ INSERT INTO `rating` (`anime_id`, `rating`) VALUES
 (1, 1),
 (3, 4),
 (3, 5),
-(3, 3);
+(3, 3),
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -137,7 +142,7 @@ INSERT INTO `user` (`id`, `User_Name`, `Pic`, `Email`, `Password`, `Role`, `Crea
 (10, 'admin', 'Screenshot_20211024-183436.png', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', '2023-05-24 12:01:35', '2023-05-24 12:01:35'),
 (11, 'user', 'pic.png', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', '2023-05-25 01:50:37', '2023-05-25 01:53:03'),
 (12, 'creator', 'Screenshot_20211223-200824.png', 'creator@gmail.com', 'ee2433259b0fe399b40e81d2c98a38b6', 'creator', '2023-05-25 02:45:26', '2023-05-25 02:45:26'),
-(13, 'User2', 'logo.png', 'user2@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', '2023-06-18 10:26:24', '2023-06-18 10:26:24');
+(13, 'User2', 'one_piece.jpg', 'user2@gmail.com', '0d8d5cd06832b29560745fe4e1b941cf', 'user', '2023-06-18 10:26:24', '2023-06-30 01:06:38');
 
 -- --------------------------------------------------------
 
@@ -219,7 +224,7 @@ ALTER TABLE `anime_info`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user`

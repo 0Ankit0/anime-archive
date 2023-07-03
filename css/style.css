@@ -405,7 +405,7 @@ ol {
 }
 
 .header__menu ul li a {
-  font-size: 15px;
+  font-size: 25px;
   color: #b7b7b7;
   display: block;
   font-weight: 700;
@@ -413,6 +413,7 @@ ol {
   -o-transition: all, 0.5s;
   transition: all, 0.5s;
   padding: 20px;
+  padding-top: 35px;
 }
 
 .header__menu ul li a span {

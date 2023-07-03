@@ -32,7 +32,7 @@ require('inc/header.php');
         </ul> -->
     <ul class="nav nav-tabs" id="myTab" role="tablist" style="flex-direction: column;">
         <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="Bookmarks" aria-selected="true">Bookmarks</a>
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="Bookmarks" aria-selected="true">Favourites</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
@@ -96,13 +96,17 @@ require('inc/header.php');
         <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
             <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                 <img src="Uploads/Pictures/<?php echo $data['Pic'] ?>" alt="Generic placeholder image" style="min-width: 150px; z-index: 1 ;min-height: 170px; object-fit: cover;">
-                <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="./admin/production/logout.php">Logout</a>
+                <div style="display: flex;">
+
+                    <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="./admin/production/logout.php">Logout</a>
+                    <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="disableUser.php?uid=<?php echo $id ?>">Disable account</a>
+                </div>
             </div>
-            <div class="ms-3" style="margin-top: 130px;">
+            <div class="ms-3" style="margin-top: 150px;">
                 <h2><?php echo $data['User_Name'] ?></h2>
             </div>
         </div>
-        <div style="margin-top: 6rem;">
+        <div style="margin-top: 7rem;">
             <form action="UpdateUser.php" method="POST" enctype="multipart/form-data">
                 <div class="container h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">

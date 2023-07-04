@@ -1,6 +1,12 @@
 <?php
 require('inc/header.php');
 require('connection/config.php');
+if(isset($_SESSION['status'])){
+    $status = $_SESSION['status'];
+    if($status==0){
+        header("location:profile.php");
+    }
+}
 ?>
 <!-- Breadcrumb Begin -->
 

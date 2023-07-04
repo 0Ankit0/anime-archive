@@ -15,17 +15,11 @@ if (isset($_POST['Login'])) {
         $_SESSION['id'] = $row['id'];
         $_SESSION['role'] = $row['Role'];
         $_SESSION['Pic'] = $row['Pic'];
+        $_SESSION['status'] = $row['status'];
         switch ($row['Role']) {
             case "user":
                 if ($row['status'] == 0) {
-?>
-                    <p>Your account is disabled?Do you want to enable it</p>
-                    <div style="display: flex;">
-
-                        <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="disableUser.php?uid=<?php echo $id ?>">Enable account</a>
-                        <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="index.php">no</a>
-                    </div>
-<?php
+                    header("location:/anime-archive/profile.php");
                 } else {
 
                     header("location:/anime-archive/");

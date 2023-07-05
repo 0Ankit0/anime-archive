@@ -32,10 +32,10 @@ require('inc/header.php');
         </ul> -->
     <ul class="nav nav-tabs" id="myTab" role="tablist" style="flex-direction: column;">
         <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="Bookmarks" aria-selected="true">Favourites</a>
+            <a class="nav-link " id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="Bookmarks" aria-selected="true">Favourites</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
         </li>
     </ul>
 
@@ -50,7 +50,7 @@ require('inc/header.php');
             <h3 style="color: whitesmoke;">Menu 1</h3>
             <p style="color: whitesmoke;">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div> -->
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="padding-inline: 4rem;width: 100%;">
+    <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab" style="padding-inline: 4rem;width: 100%;">
         <table class="table">
 
             <tbody>
@@ -83,7 +83,7 @@ require('inc/header.php');
         </table>
 
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="padding-inline: 4rem;width: 100%;">
+    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="padding-inline: 4rem;width: 100%;">
         <?php
         require('connection/config.php');
         $id = $_SESSION['id'];
@@ -98,8 +98,21 @@ require('inc/header.php');
                 <img src="Uploads/Pictures/<?php echo $data['Pic'] ?>" alt="Generic placeholder image" style="min-width: 150px; z-index: 1 ;min-height: 170px; object-fit: cover;">
                 <div style="display: flex;">
 
-                    <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="./admin/production/logout.php">Logout</a>
-                    <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="disableUser.php?uid=<?php echo $id ?>">Disable account</a>
+                    <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="./admin/production/logout.php">Logout </a>
+                    <?php
+                    if (isset($_SESSION['status'])) {
+                        if ($_SESSION['status'] == 0) {
+                    ?>
+
+                            <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="enableUser.php?uid=<?php echo $id ?>">Enable account </a>
+                        <?php
+                        } else {
+                        ?>
+                            <a type="button" class="follow-btn" style="border: none; margin-top: 20px;" href="disableUser.php?uid=<?php echo $id ?>">Disable account</a>
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
             <div class="ms-3" style="margin-top: 150px;">
@@ -155,7 +168,7 @@ require('inc/header.php');
                                         </div>
                                         <div class="col-md-9 pe-5">
 
-                                            <input type="password" class="form-control form-control-lg" name="password" value="<?php echo $data['Password'] ?>" />
+                                            <input type="password" class="form-control form-control-lg" name="password" />
                                         </div>
                                     </div>
 

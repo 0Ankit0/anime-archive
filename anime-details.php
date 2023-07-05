@@ -192,7 +192,7 @@ $data = mysqli_fetch_assoc($anime_result);
                             <div class="blog__details__comment__item">
                                 <?php
 
-                                $sql = "SELECT comments.id,user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.Like
+                                $sql = "SELECT comments.id,user.User_Name,comments.Comment,user.Pic,comments.Created_At,comments.LikeCount
                             FROM user
                             INNER JOIN comments ON comments.U_Id=user.id 
                             WHERE comments.A_Id = $animeId";
@@ -204,19 +204,52 @@ $data = mysqli_fetch_assoc($anime_result);
                                     $comment = $row['Comment'];
                                     $pic = $row['Pic'];
                                     $created_at =  $row['Created_At'];
-                                    $like = $row['Like'];
+                                    $like = $row['LikeCount'];
                                 ?>
 
                                     <div class="blog__details__comment__item__pic">
                                         <img src="Uploads/Pictures/<?php echo $pic; ?>" alt="" width="80" height="80" style="border-radius:50%" />
                                     </div>
+                                    <?php
+
+                                    // Check if the like count is stored in session
+                                    if (!isset($_SESSION['likeCount'])) {
+                                        $_SESSION['likeCount'] = 0;
+                                    }
+
+                                    // Get the current like count
+                                    $likeCount = $_SESSION['likeCount'];
+
+                                    // Check if the like button was clicked
+                                    if (isset($_GET['like'])) {
+                                        // Increase the like count by 1
+                                        $likeCount++;
+                                        $_SESSION['likeCount'] = $likeCount;
+                                        echo $likeCount; // Send the updated like count back as the response
+                                        // Stop further execution
+                                    }
+
+                                    // Check if the unlike button was clicked
+                                    if (isset($_GET['unlike'])) {
+                                        // Decrease the like count by 1
+                                        $likeCount--;
+                                        $_SESSION['likeCount'] = $likeCount;
+                                        echo $likeCount; // Send the updated like count back as the response
+                                        // Stop further execution
+                                    }
+
+                                    ?>
                                     <div class="blog__details__comment__item__text">
                                         <span><?php echo date('Y-m-d', strtotime($created_at)) ?></span>
                                         <h5><?php echo $username ?></h5>
                                         <p><?php echo $comment ?></p>
                                         <span>
-                                            <!-- <span id="likeCount_<?php echo $id; ?>"><?php echo $like; ?></span> -->
-                                            <!-- <a href="#" class="like-link" data-comment-id="<?php echo $id; ?>">Like</a> -->
+                                            <span id="likeCount_<?php echo $id; ?>"><?php echo $likeCount; ?></span>
+
+                                            <form method="get">
+                                                <input type="button" id="likeBtn_<?php echo $id; ?>" value="Like" onclick="handleLikeClick(<?php echo $id; ?>)" <?php echo ($likeCount > 0) ? 'disabled' : ''; ?>>
+                                                <input type="button" id="unlikeBtn_<?php echo $id; ?>" value="Unlike" onclick="handleUnlikeClick(<?php echo $id; ?>)" <?php echo ($likeCount <= 0) ? 'disabled' : ''; ?>>
+                                            </form>
 
 
                                             <a href='delete-comment.php?cid=<?php echo $row['id']; ?>&aid=<?php echo $animeId ?>'>Delete</a>
@@ -225,48 +258,36 @@ $data = mysqli_fetch_assoc($anime_result);
                                     </div>
 
 
-                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                                     <script>
-                                        $(document).ready(function() {
-                                            $(".like-link").on("click", function(e) {
-                                                e.preventDefault();
+                                        // JavaScript function to handle button clicks
+                                        function handleLikeClick(commentId) {
+                                            // Disable the like button
+                                            document.getElementById('likeBtn_' + commentId).disabled = true;
+                                            // Enable the unlike button
+                                            document.getElementById('unlikeBtn_' + commentId).disabled = false;
 
-                                                // Get the comment ID from the data-comment-id attribute
-                                                var commentId = $(this).data("comment-id");
-
-                                                // Get the current like count element
-                                                var likeCountElement = $("#likeCount_" + commentId);
-
-                                                // Get the current like count value
-                                                var likeCount = parseInt(likeCountElement.text());
-
-                                                // Check if the user has already liked the comment
-                                                var hasLiked = $(this).hasClass("liked");
-
-                                                // Calculate the new like count
-                                                var newLikeCount = hasLiked ? likeCount - 1 : likeCount + 1;
-
-                                                // Send an AJAX request to update the like count
-                                                $.ajax({
-                                                    url: "update-like.php",
-                                                    method: "POST",
-                                                    data: {
-                                                        commentId: commentId,
-                                                        newLikeCount: newLikeCount
-                                                    },
-                                                    success: function(response) {
-                                                        // Update the like count element with the new value
-                                                        likeCountElement.text(newLikeCount);
-
-                                                        // Toggle the "liked" class to indicate the user's action
-                                                        $(this).toggleClass("liked");
-                                                    },
-                                                    error: function() {
-                                                        console.log("An error occurred while updating the like count.");
-                                                    }
-                                                });
+                                            // Make an AJAX request to update the like count
+                                            $.post(window.location.href, {
+                                                ['like' + commentId]: true
+                                            }, function(response) {
+                                                document.getElementById('likeCount_' + commentId).textContent = response;
                                             });
-                                        });
+                                        }
+
+                                        function handleUnlikeClick(commentId) {
+                                            // Enable the like button
+                                            document.getElementById('likeBtn_' + commentId).disabled = false;
+                                            // Disable the unlike button
+                                            document.getElementById('unlikeBtn_' + commentId).disabled = true;
+
+                                            // Make an AJAX request to update the like count
+                                            $.post(window.location.href, {
+                                                ['unlike' + commentId]: true
+                                            }, function(response) {
+                                                document.getElementById('likeCount_' + commentId).textContent = response;
+                                            });
+                                        }
                                     </script>
 
 

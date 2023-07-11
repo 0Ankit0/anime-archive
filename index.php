@@ -1,9 +1,9 @@
 <?php
 require('inc/header.php');
 require('connection/config.php');
-if(isset($_SESSION['status'])){
+if (isset($_SESSION['status'])) {
     $status = $_SESSION['status'];
-    if($status==0){
+    if ($status == 0) {
         header("location:profile.php");
     }
 }
@@ -73,11 +73,11 @@ if(isset($_SESSION['status'])){
                     </div>
                     <div class="row">
                         <?php
-                        $anime_query = "SELECT * FROM `anime_info`  WHERE Genre LIKE '%adventure%'";
+                        $anime_query = "SELECT * FROM `anime_info`  WHERE Genre LIKE '%adventure%'  ORDER BY `id` DESC";
                         $anime_result = mysqli_query($conn, $anime_query);
                         $count = 0;
                         while ($count < 3) {
-                            $data = mysqli_fetch_assoc($anime_result);
+                            $data = mysqli_fetch_array($anime_result);
                             $count += 1;
                         ?>
                             <div class="col-lg-4 col-md-6 col-sm-6">

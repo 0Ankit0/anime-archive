@@ -132,7 +132,7 @@ if (!isset($_SESSION['username'])) {
                                     <br />
                                     <div class="form-group">
                                         <div class="col-md-9 col-sm-9  offset-md-3">
-                                            <button type="cancel" class="btn btn-warning">Cancel</button>
+                                            <a class="btn btn-warning" href="manageusers.php" role="button">Cancel</a>
                                             <button type="reset" class="btn btn-danger">Reset</button>
                                             <button type="submit" class="btn btn-danger" name="submit">submit</button>
                                         </div>

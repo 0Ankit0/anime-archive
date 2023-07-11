@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])) {
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Add Users</h3>
+                    <h3>Add anime_info</h3>
                 </div>
 
                 <div class="title_right">
@@ -41,7 +41,7 @@ if (!isset($_SESSION['username'])) {
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Registration Form</h2>
+                            <h2>Anime info</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -100,7 +100,7 @@ if (!isset($_SESSION['username'])) {
                                     <br />
                                     <div class="form-group">
                                         <div class="col-md-9 col-sm-9  offset-md-3">
-                                            <a class="btn btn-warning" href="manageusers.php" role="button">Cancel</a>
+                                            <a class="btn btn-warning" href="manageanimeinfo.php" role="button">Cancel</a>
                                             <!-- <button type="cancel" class="btn btn-warning">Cancel</button> -->
                                             <button type="reset" class="btn btn-danger">Reset</button>
                                             <button type="submit" class="btn btn-primary" name="update">update</button>

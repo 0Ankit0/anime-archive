@@ -1,9 +1,9 @@
 <?php
 require('inc/header.php');
 require('connection/config.php');
-if(isset($_SESSION['status'])){
+if (isset($_SESSION['status'])) {
     $status = $_SESSION['status'];
-    if($status==0){
+    if ($status == 0) {
         header("location:profile.php");
     }
 }
@@ -51,12 +51,11 @@ if(isset($_SESSION['status'])){
                     </div>
                     <div class="row">
                         <?php
-                        $anime_query = "SELECT * FROM `anime_info`  ORDER BY `id` DESC";
+                        $anime_query = "SELECT * FROM `anime_info`  WHERE Genre LIKE '%adventure%'  ORDER BY `id` DESC";
                         $anime_result = mysqli_query($conn, $anime_query);
                         $count = 0;
-                        while ($count < 3) {
-                            $data = mysqli_fetch_array($anime_result);
-                            $count += 1;
+                        while ($data = mysqli_fetch_array($anime_result)) {
+
                         ?>
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <a href="anime-details.php?id=<?php echo $data['id']
@@ -67,8 +66,18 @@ if(isset($_SESSION['status'])){
                                         </div>
                                         <div class="product__item__text">
                                             <ul>
-                                                <li>Active</li>
-                                                <li>Movie</li>
+                                                <?php
+                                                $values = explode(',', $data['Genre']);
+                                                // Loop through the array of values
+                                                $count = 0;
+                                                foreach ($values as $value) {
+                                                    if ($count < 3) { ?>
+                                                        <li><?php echo $value ?></li>
+                                                <?php
+                                                        $count++;
+                                                    }
+                                                }
+                                                ?>
                                             </ul>
                                             <h5><?php echo $data['Anime_Name'] ?></h5>
                                         </div>

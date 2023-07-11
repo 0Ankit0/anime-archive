@@ -104,14 +104,26 @@ if (!isset($_SESSION['username'])) {
                                                     <button type="button" class="btn btn-success btn-xs"><?php echo $row['Role'] ?></button>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $row['id']; ?>">
-                                                        <i class="fa fa-trash-o"></i>Delete
-                                                    </button>
+                                                    <?php
+                                                    if ($row['status'] == 1) {
+                                                    ?>
+                                                        <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $row['id']; ?>">
+                                                            <i class="fa fa-trash-o"></i>Delete <?php echo $row['status']; ?>
+                                                        </button>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $row['id']; ?>" disabled>
+                                                            <i class="fa fa-trash-o"></i>Disabled
+                                                        </button>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                     <script>
                                                         // Get the ID value when the delete button is clicked
                                                         $('.delete-button').on('click', function() {
                                                             var id = $(this).data('id');
-                                                            $('#confirmDelete').attr('href', 'deletefile.php?id=' + id);
+                                                            $('#confirmDelete').attr('href', 'deleteuser.php?id=' + id);
                                                         });
                                                     </script>
                                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -166,9 +178,21 @@ if (!isset($_SESSION['username'])) {
                                                     <button type="button" class="btn btn-success btn-xs"><?php echo $row['Role'] ?></button>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $row['id']; ?>">
-                                                        <i class="fa fa-trash-o"></i>Delete
-                                                    </button>
+                                                    <?php
+                                                    if ($row['status'] == 1) {
+                                                    ?>
+                                                        <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $row['id']; ?>">
+                                                            <i class="fa fa-trash-o"></i>Disable
+                                                        </button>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $row['id']; ?>" disabled>
+                                                            <i class="fa fa-trash-o"></i>Disabled
+                                                        </button>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                     <script>
                                                         // Get the ID value when the delete button is clicked
                                                         $('.delete-button').on('click', function() {

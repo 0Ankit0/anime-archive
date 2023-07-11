@@ -47,7 +47,7 @@ if (!isset($_SESSION['username'])) {
                 <div class="col-md-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Users</h2>
+                            <h2>Anime info</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -65,7 +65,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                         <div class="x_content">
 
-                            <p>Simple table to edit and delete the users</p>
+                            <p>Simple table to edit and delete the animeinfo</p>
 
                             <!-- start project list -->
                             <table class="table table-striped projects">
@@ -192,7 +192,7 @@ if (!isset($_SESSION['username'])) {
                                                         // Get the ID value when the delete button is clicked
                                                         $('.delete-button').on('click', function() {
                                                             var id = $(this).data('id');
-                                                            $('#confirmDelete').attr('href', 'deletefile.php?id=' + id);
+                                                            $('#confirmDelete').attr('href', 'deleteanimeinfo.php?id=' + id);
                                                         });
                                                     </script>
                                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
